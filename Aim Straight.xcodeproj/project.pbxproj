@@ -292,8 +292,9 @@
 				DEVELOPMENT_TEAM = U7F5VP3NPF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Pictures will be stored in your photo library.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -322,8 +323,9 @@
 				DEVELOPMENT_TEAM = U7F5VP3NPF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Pictures will be stored in your photo library.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

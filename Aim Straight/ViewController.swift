@@ -29,12 +29,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func settingsTapped(_ sender: Any) {
-        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-        guard UIApplication.shared.canOpenURL(settingsUrl) else { return }
-
-        UIApplication.shared.open(settingsUrl) { _ in
-            exit(0)
-        }
+        openSettings()
     }
     
     private func canPresentImagePicker() -> Bool {
@@ -91,6 +86,17 @@ class ViewController: UIViewController {
         }
     }
 
+    private func openSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(settingsUrl) { _ in
+            exit(0)
+        }
+    }
+
+    private func openPhotos() {
+        UIApplication.shared.open(URL(string: "photos-redirect://")!)
+    }
+
 }
 
 
@@ -104,9 +110,25 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        // TODO: Save image to library.
+        if let image = info[.editedImage] as? UIImage {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
+        } else if let image = info[.originalImage] as? UIImage {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
+        }
 
         dismissImagePicker()
+    }
+
+    @objc private func saveCompletion(_ image: UIImage, error: Error?, context: UnsafeMutableRawPointer) {
+        if let error = error {
+            print("Error saving photo: \(error.localizedDescription)")
+
+            // TODO: Display error message, offer to take user to Settings.
+        } else {
+            print("Photo saved successfully.")
+
+            // TODO: Display thumbnail that opens the Photos app when tapped.
+        }
     }
 
 }
