@@ -2,17 +2,24 @@
 //  ViewController.swift
 //  Aim Straight
 //
-// © 2023 Stephen Lardieri
+//  © 2023 Stephen Lardieri
 //
 
 import UIKit
 import AVFoundation
+import CoreMotion
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var settings: UIButton!
+    // MARK: Interface Builder outlets
+
     @IBOutlet weak var cameraNotAvailable: UILabel!
-    
+    @IBOutlet weak var photosNotAvailable: UILabel!
+    @IBOutlet weak var motionNotAvailable: UILabel!
+    @IBOutlet weak var settingsPrompt: UIStackView!
+
+    // MARK: Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -20,45 +27,24 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         guard presentedViewController == nil else { return }
 
-        if canPresentImagePicker() {
+        if everythingAvailable {
             presentImagePicker()
         } else {
             cameraNotAvailable.isHidden = false
+            photosNotAvailable.isHidden = false
+            motionNotAvailable.isHidden = false
+            settingsPrompt.isHidden = false
         }
 
     }
+
+    // MARK: Interface Builder actions
 
     @IBAction func settingsTapped(_ sender: Any) {
         openSettings()
     }
-    
-    private func canPresentImagePicker() -> Bool {
-        guard UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) else {
-            return false
-        }
 
-        guard UIImagePickerController.isCameraDeviceAvailable(.rear) || UIImagePickerController.isCameraDeviceAvailable(.front) else {
-            return false
-        }
-
-        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
-            case .notDetermined:
-                break
-
-            case .denied, .restricted:
-                settings.isHidden = false
-                return false
-
-            case .authorized:
-                return true
-
-            @unknown default:
-                return false
-        }
-
-        // UIImagePickerController will ask for permission. No need to do it explicitly.
-        return true
-    }
+    // MARK: Private methods
 
     private func presentImagePicker() {
         let imagePicker = UIImagePickerController()
@@ -97,6 +83,16 @@ class ViewController: UIViewController {
         UIApplication.shared.open(URL(string: "photos-redirect://")!)
     }
 
+    // MARK: Private properties
+
+    private var everythingAvailable: Bool {
+        cameraAvailable && photosAvailable && motionAvailable
+    }
+
+    private var cameraAvailable = false
+    private var photosAvailable = false
+    private var motionAvailable = false
+
 }
 
 
@@ -128,6 +124,31 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             print("Photo saved successfully.")
 
             // TODO: Display thumbnail that opens the Photos app when tapped.
+        }
+    }
+
+}
+
+
+// MARK: - Device capabilities and permissions
+
+extension ViewController {
+
+    private func determineCameraAvailability() {
+        guard UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) else {
+            cameraAvailable = false
+            return
+        }
+
+        guard UIImagePickerController.isCameraDeviceAvailable(.rear) || UIImagePickerController.isCameraDeviceAvailable(.front) else {
+            cameraAvailable = false
+            return
+        }
+
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { permissionGranted in
+            OperationQueue.main.addOperation {
+                self.cameraAvailable = permissionGranted
+            }
         }
     }
 

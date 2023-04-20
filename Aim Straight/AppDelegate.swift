@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Aim Straight
 //
-// © 2023 Stephen Lardieri
+//  © 2023 Stephen Lardieri
 //
 
 import UIKit
