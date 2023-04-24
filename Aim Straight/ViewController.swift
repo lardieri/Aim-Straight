@@ -134,6 +134,8 @@ class ViewController: UIViewController {
     private var resourcesEvaluated = ResourceEvaulationState.notStarted
     private let interactionQueue = InteractionQueue()
 
+    private let motionManager = CMMotionManager()
+
 }
 
 
@@ -194,6 +196,7 @@ fileprivate extension ViewController {
             self.resourcesEvaluated = .finished
             OperationQueue.main.addOperation {
                 self.updateUI()
+                finished()
             }
         }
     }
@@ -229,7 +232,7 @@ fileprivate extension ViewController {
     }
 
     private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
-        motionAvailable = true
+        motionAvailable = motionManager.isDeviceMotionAvailable
         finished()
     }
 
