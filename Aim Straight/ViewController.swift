@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import CoreMotion
+import Photos
 import AsyncOperation
 import InteractionQueue
 
@@ -219,8 +220,12 @@ fileprivate extension ViewController {
     }
 
     private func evaluatePhotoLibraryAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
-        photosAvailable = true
-        finished()
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+            OperationQueue.main.addOperation {
+                self.photosAvailable = (status == .authorized)
+                finished()
+            }
+        }
     }
 
     private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
