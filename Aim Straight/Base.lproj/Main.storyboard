@@ -17,9 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-aH-usL">
-                                <rect key="frame" x="160" y="284" width="0.0" height="0.0"/>
+                                <rect key="frame" x="32" y="284" width="256" height="0.0"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ins-GE-jHy" userLabel="Error Messages">
+                                        <rect key="frame" x="128" y="0.0" width="0.0" height="0.0"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera not available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INN-Y4-eWo">
                                                 <rect key="frame" x="0.0" y="0.0" width="346" height="0.0"/>
@@ -42,7 +43,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="M4U-r0-bHy" userLabel="Settings Prompt">
-                                        <rect key="frame" x="-152" y="0.0" width="304.5" height="77"/>
+                                        <rect key="frame" x="-24" y="0.0" width="304.5" height="77"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please adjust settings to allow access." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fi8-hV-g19">
                                                 <rect key="frame" x="0.0" y="0.0" width="304.5" height="0.0"/>
@@ -70,7 +71,7 @@
                         <constraints>
                             <constraint firstItem="OF1-aH-usL" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="W2u-w4-2AP"/>
                             <constraint firstItem="OF1-aH-usL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pna-Um-cwg"/>
-                            <constraint firstItem="OF1-aH-usL" firstAttribute="width" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="v6e-4k-eXX"/>
+                            <constraint firstItem="OF1-aH-usL" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="v6e-4k-eXX"/>
                         </constraints>
                     </view>
                     <connections>

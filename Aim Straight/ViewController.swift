@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 import CoreMotion
+import AsyncOperation
+import InteractionQueue
 
 class ViewController: UIViewController {
 
@@ -25,17 +27,24 @@ class ViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        guard presentedViewController == nil else { return }
+        super.viewDidAppear(animated)
+        interactionQueue.onViewDidAppear()
 
-        if everythingAvailable {
-            presentImagePicker()
-        } else {
-            cameraNotAvailable.isHidden = false
-            photosNotAvailable.isHidden = false
-            motionNotAvailable.isHidden = false
-            settingsPrompt.isHidden = false
+        switch resourcesEvaluated {
+            case .notStarted:
+                evaluateResourceAvailability()
+
+            case .evaluating:
+                break
+
+            case .finished:
+                updateUI()
         }
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        interactionQueue.onViewWillDisappear()
+        super.viewWillDisappear(animated)
     }
 
     // MARK: Interface Builder actions
@@ -46,7 +55,24 @@ class ViewController: UIViewController {
 
     // MARK: Private methods
 
+    private func updateUI() {
+        assert(resourcesEvaluated == .finished)
+
+        if everythingAvailable {
+            if presentedViewController == nil {
+                presentImagePicker()
+            }
+        } else {
+            cameraNotAvailable.isHidden = cameraAvailable
+            photosNotAvailable.isHidden = photosAvailable
+            motionNotAvailable.isHidden = motionAvailable
+            settingsPrompt.isHidden = false
+        }
+    }
+
     private func presentImagePicker() {
+        assert(presentedViewController == nil)
+
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
         imagePicker.showsCameraControls = true
@@ -65,6 +91,9 @@ class ViewController: UIViewController {
     private func dismissImagePicker() {
         guard presentedViewController is UIImagePickerController else { return }
 
+        // When we use the built-in camera controls, we need to dismiss the picker after every picture.
+        // See Apple's documentation for UIImagePickerController.
+        // In order to take the next picture, we need to present a new picker.
         dismiss(animated: false) {
             OperationQueue.main.addOperation {
                 self.presentImagePicker()
@@ -83,6 +112,14 @@ class ViewController: UIViewController {
         UIApplication.shared.open(URL(string: "photos-redirect://")!)
     }
 
+    // MARK: Private types
+
+    private enum ResourceEvaulationState {
+        case notStarted
+        case evaluating
+        case finished
+    }
+
     // MARK: Private properties
 
     private var everythingAvailable: Bool {
@@ -92,6 +129,9 @@ class ViewController: UIViewController {
     private var cameraAvailable = false
     private var photosAvailable = false
     private var motionAvailable = false
+
+    private var resourcesEvaluated = ResourceEvaulationState.notStarted
+    private let interactionQueue = InteractionQueue()
 
 }
 
@@ -132,24 +172,60 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
 // MARK: - Device capabilities and permissions
 
-extension ViewController {
+fileprivate extension ViewController {
 
-    private func determineCameraAvailability() {
+    private func evaluateResourceAvailability() {
+        self.resourcesEvaluated = .evaluating
+
+        interactionQueue.add { finished in
+            self.evaluateCameraAvailability(finished: finished)
+        }
+
+        interactionQueue.add { finished in
+            self.evaluatePhotoLibraryAvailability(finished: finished)
+        }
+
+        interactionQueue.add { finished in
+            self.evaluateMotionAvailability(finished: finished)
+        }
+
+        interactionQueue.add { finished in
+            self.resourcesEvaluated = .finished
+            OperationQueue.main.addOperation {
+                self.updateUI()
+            }
+        }
+    }
+
+    private func evaluateCameraAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
         guard UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) else {
             cameraAvailable = false
+            finished()
             return
         }
 
         guard UIImagePickerController.isCameraDeviceAvailable(.rear) || UIImagePickerController.isCameraDeviceAvailable(.front) else {
             cameraAvailable = false
+            finished()
             return
         }
 
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { permissionGranted in
             OperationQueue.main.addOperation {
                 self.cameraAvailable = permissionGranted
+                finished()
             }
         }
+    }
+
+    private func evaluatePhotoLibraryAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
+        photosAvailable = true
+        finished()
+    }
+
+    private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
+        motionAvailable = true
+        finished()
     }
 
 }

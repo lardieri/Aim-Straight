@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */ = {isa = PBXBuildFile; productRef = DF7C0C0629F11D0000251213 /* Interaction-Queue */; };
 		DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211829EDF8940057B9B1 /* AppDelegate.swift */; };
 		DFE2211B29EDF8940057B9B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */; };
 		DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211C29EDF8940057B9B1 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = "Aim Straight";
+			packageProductDependencies = (
+				DF7C0C0629F11D0000251213 /* Interaction-Queue */,
+			);
 			productName = "Aim Straight";
 			productReference = DFE2211529EDF8940057B9B1 /* Aim Straight.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = DFE2210C29EDF8940057B9B1;
+			packageReferences = (
+				DF7C0C0529F11D0000251213 /* XCRemoteSwiftPackageReference "AsynchronousInteractionCoordinator" */,
+			);
 			productRefGroup = DFE2211629EDF8940057B9B1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -294,6 +302,7 @@
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Helps you take pictures that are level and straight.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -325,6 +334,7 @@
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Helps you take pictures that are level and straight.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -366,6 +376,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DF7C0C0529F11D0000251213 /* XCRemoteSwiftPackageReference "AsynchronousInteractionCoordinator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rule-of-72/AsynchronousInteractionCoordinator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DF7C0C0629F11D0000251213 /* Interaction-Queue */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF7C0C0529F11D0000251213 /* XCRemoteSwiftPackageReference "AsynchronousInteractionCoordinator" */;
+			productName = "Interaction-Queue";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DFE2210D29EDF8940057B9B1 /* Project object */;
 }
