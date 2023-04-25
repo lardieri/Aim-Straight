@@ -12,6 +12,8 @@ import Photos
 import AsyncOperation
 import InteractionQueue
 
+fileprivate let motionUpdateInterval = TimeInterval(1.0 / 10.0)
+
 class ViewController: UIViewController {
 
     // MARK: Interface Builder outlets
@@ -60,6 +62,11 @@ class ViewController: UIViewController {
         assert(resourcesEvaluated == .finished)
 
         if everythingAvailable {
+            if !motionManager.isDeviceMotionActive {
+                motionManager.deviceMotionUpdateInterval = motionUpdateInterval
+                motionManager.startDeviceMotionUpdates(using: .xArbitraryZVertical, to: motionQueue, withHandler: processMotion(motion:error:))
+            }
+
             if presentedViewController == nil {
                 presentImagePicker()
             }
@@ -135,6 +142,11 @@ class ViewController: UIViewController {
     private let interactionQueue = InteractionQueue()
 
     private let motionManager = CMMotionManager()
+    private let motionQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    } ()
 
 }
 
@@ -168,6 +180,43 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
             // TODO: Display thumbnail that opens the Photos app when tapped.
         }
+    }
+
+}
+
+
+// MARK: - Motion processing
+
+fileprivate extension ViewController {
+
+    private func processMotion(motion: CMDeviceMotion?, error: Error?) {
+        if let error = error {
+            print("Motion error: \(error)")
+            return
+        }
+
+        guard let motion = motion else {
+            print("Motion error: data is nil")
+            return
+        }
+
+        let gravity = motion.gravity
+        printGravity(gravity)
+    }
+
+    private func printGravity(_ gravity: CMAcceleration) {
+        func format(_ d: Double) -> String {
+            return String(format: "%+.2f", d)
+        }
+
+        let x = format(gravity.x)
+        let y = format(gravity.y)
+        let z = format(gravity.z)
+        let magnitude = format(gravity.magnitude)
+        let pitch = format(gravity.pitch)
+        let roll = format(gravity.roll)
+
+        print("Gravity vector: (x: \(x), y: \(y), z: \(z)  magnitude: \(magnitude)  dominant: \(gravity.dominantAxis)  pitch: \(pitch)  roll: \(roll)")
     }
 
 }

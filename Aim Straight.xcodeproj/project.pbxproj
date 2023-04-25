@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */ = {isa = PBXBuildFile; productRef = DF7C0C0629F11D0000251213 /* Interaction-Queue */; };
+		DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0829F7B0F500251213 /* Vector math.swift */; };
 		DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211829EDF8940057B9B1 /* AppDelegate.swift */; };
 		DFE2211B29EDF8940057B9B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */; };
 		DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211C29EDF8940057B9B1 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF7C0C0829F7B0F500251213 /* Vector math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector math.swift"; sourceTree = "<group>"; };
 		DFE2211529EDF8940057B9B1 /* Aim Straight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aim Straight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE2211829EDF8940057B9B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				DFE2211829EDF8940057B9B1 /* AppDelegate.swift */,
 				DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */,
+				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
 				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
 				DFE2211E29EDF8940057B9B1 /* Main.storyboard */,
 				DFE2212129EDF8980057B9B1 /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */,
+				DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */,
 				DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */,
 				DFE2211B29EDF8940057B9B1 /* SceneDelegate.swift in Sources */,
 			);
@@ -307,6 +311,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "accelerometer gyroscope";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,6 +344,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "accelerometer gyroscope";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
