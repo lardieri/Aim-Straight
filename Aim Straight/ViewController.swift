@@ -12,7 +12,7 @@ import Photos
 import AsyncOperation
 import InteractionQueue
 
-fileprivate let motionUpdateInterval = TimeInterval(1.0 / 10.0)
+fileprivate let motionUpdateInterval = TimeInterval(1.0 / 120.0)
 
 class ViewController: UIViewController {
 

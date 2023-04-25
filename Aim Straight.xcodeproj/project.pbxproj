@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */ = {isa = PBXBuildFile; productRef = DF7C0C0629F11D0000251213 /* Interaction-Queue */; };
 		DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0829F7B0F500251213 /* Vector math.swift */; };
+		DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0A29F7B22D00251213 /* TiltView.swift */; };
 		DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211829EDF8940057B9B1 /* AppDelegate.swift */; };
 		DFE2211B29EDF8940057B9B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */; };
 		DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211C29EDF8940057B9B1 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		DF7C0C0829F7B0F500251213 /* Vector math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector math.swift"; sourceTree = "<group>"; };
+		DF7C0C0A29F7B22D00251213 /* TiltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltView.swift; sourceTree = "<group>"; };
 		DFE2211529EDF8940057B9B1 /* Aim Straight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aim Straight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE2211829EDF8940057B9B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */,
 				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
 				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
+				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
 				DFE2211E29EDF8940057B9B1 /* Main.storyboard */,
 				DFE2212129EDF8980057B9B1 /* Assets.xcassets */,
 				DFE2212329EDF8980057B9B1 /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */,
 				DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */,
 				DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */,
 				DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */,

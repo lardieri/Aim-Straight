@@ -37,7 +37,7 @@ extension CMAcceleration {
                 return z
 
             case .z:
-                return y
+                return x
         }
     }
 
@@ -50,7 +50,7 @@ extension CMAcceleration {
                 return x
 
             case .z:
-                return x
+                return y
         }
     }
 
