@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var photosNotAvailable: UILabel!
     @IBOutlet weak var motionNotAvailable: UILabel!
     @IBOutlet weak var settingsPrompt: UIStackView!
+    @IBOutlet var tiltView: TiltView!
 
     // MARK: Life cycle
 
@@ -92,6 +93,10 @@ class ViewController: UIViewController {
         } else {
             imagePicker.cameraDevice = .front
         }
+
+        // The ! seems a little sketchy, but it's what Apple's sample code does.
+        tiltView.frame = (imagePicker.cameraOverlayView?.frame)!
+        imagePicker.cameraOverlayView = tiltView
 
         present(imagePicker, animated: false, completion: nil)
     }
@@ -201,7 +206,9 @@ fileprivate extension ViewController {
         }
 
         let gravity = motion.gravity
-        printGravity(gravity)
+
+        tiltView.normalizedRoll = gravity.roll
+        tiltView.normalizedPitch = gravity.pitch
     }
 
     private func printGravity(_ gravity: CMAcceleration) {

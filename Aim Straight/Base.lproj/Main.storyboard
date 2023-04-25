@@ -79,9 +79,16 @@
                         <outlet property="motionNotAvailable" destination="X00-tE-3Uu" id="CkN-9N-uX1"/>
                         <outlet property="photosNotAvailable" destination="qb6-Xw-tU0" id="UFQ-bM-vgi"/>
                         <outlet property="settingsPrompt" destination="M4U-r0-bHy" id="818-Tb-2YE"/>
+                        <outlet property="tiltView" destination="cRm-DN-0Lp" id="tJq-4J-ay3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view opaque="NO" contentMode="scaleToFill" id="cRm-DN-0Lp" customClass="TiltView" customModule="Aim_Straight" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="318" height="179"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <viewLayoutGuide key="safeArea" id="8we-ne-tPe"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="20" y="84"/>
         </scene>
