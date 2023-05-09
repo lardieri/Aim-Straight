@@ -169,4 +169,19 @@ class TiltView: UIView {
         ctx.drawPath(using: .fillStroke)
     }
 
+    override func willMove(toSuperview newSuperview: UIView?) {
+        constraints.forEach { $0.isActive = false }
+    }
+
+    override func didMoveToSuperview() {
+        if let superview = superview {
+            [
+                NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: superview, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: superview, attribute: .centerY, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: superview, attribute: .width, multiplier: 0.8, constant: 0.0),
+                NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: superview, attribute: .height, multiplier: 0.8, constant: 0.0),
+            ].forEach { $0.isActive = true }
+        }
+    }
+
 }

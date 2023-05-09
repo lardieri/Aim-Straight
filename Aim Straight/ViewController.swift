@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     // MARK: Life cycle
 
     override func viewDidLoad() {
+        tiltView.translatesAutoresizingMaskIntoConstraints = false
+
         super.viewDidLoad()
     }
 
@@ -94,8 +96,6 @@ class ViewController: UIViewController {
             imagePicker.cameraDevice = .front
         }
 
-        // The ! seems a little sketchy, but it's what Apple's sample code does.
-        tiltView.frame = (imagePicker.cameraOverlayView?.frame)!
         imagePicker.cameraOverlayView = tiltView
 
         present(imagePicker, animated: false, completion: nil)
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         // In order to take the next picture, we need to present a new picker.
         dismiss(animated: false) {
             OperationQueue.main.addOperation {
-                self.presentImagePicker()
+                self.updateUI()
             }
         }
     }
