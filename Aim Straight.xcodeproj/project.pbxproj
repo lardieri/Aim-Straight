@@ -11,7 +11,6 @@
 		DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0829F7B0F500251213 /* Vector math.swift */; };
 		DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0A29F7B22D00251213 /* TiltView.swift */; };
 		DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211829EDF8940057B9B1 /* AppDelegate.swift */; };
-		DFE2211B29EDF8940057B9B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */; };
 		DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211C29EDF8940057B9B1 /* ViewController.swift */; };
 		DFE2212029EDF8940057B9B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE2211E29EDF8940057B9B1 /* Main.storyboard */; };
 		DFE2212229EDF8980057B9B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFE2212129EDF8980057B9B1 /* Assets.xcassets */; };
@@ -23,7 +22,6 @@
 		DF7C0C0A29F7B22D00251213 /* TiltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltView.swift; sourceTree = "<group>"; };
 		DFE2211529EDF8940057B9B1 /* Aim Straight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aim Straight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE2211829EDF8940057B9B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DFE2211C29EDF8940057B9B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFE2211F29EDF8940057B9B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DFE2212129EDF8980057B9B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				DFE2211829EDF8940057B9B1 /* AppDelegate.swift */,
-				DFE2211A29EDF8940057B9B1 /* SceneDelegate.swift */,
 				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
 				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
 				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
@@ -156,7 +153,6 @@
 				DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */,
 				DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */,
 				DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */,
-				DFE2211B29EDF8940057B9B1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -288,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -312,6 +308,7 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Helps you take pictures that are level and straight.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your Photo Library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Pictures you take will be stored in your Photo Library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -346,6 +343,7 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Helps you take pictures that are level and straight.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your Photo Library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Pictures you take will be stored in your Photo Library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -395,7 +393,7 @@
 			repositoryURL = "https://github.com/rule-of-72/AsynchronousInteractionCoordinator";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
+				minimumVersion = 1.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

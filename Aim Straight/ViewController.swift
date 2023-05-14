@@ -281,10 +281,19 @@ fileprivate extension ViewController {
     }
 
     private func evaluatePhotoLibraryAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
-        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-            OperationQueue.main.addOperation {
-                self.photosAvailable = (status == .authorized)
-                finished()
+        if #unavailable(iOS 14) {
+            PHPhotoLibrary.requestAuthorization() { status in
+                OperationQueue.main.addOperation {
+                    self.photosAvailable = (status == .authorized)
+                    finished()
+                }
+            }
+        } else {
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+                OperationQueue.main.addOperation {
+                    self.photosAvailable = (status == .authorized)
+                    finished()
+                }
             }
         }
     }
