@@ -74,10 +74,12 @@ class ViewController: UIViewController {
                 presentImagePicker()
             }
         } else {
-            cameraNotAvailable.isHidden = cameraAvailable
-            photosNotAvailable.isHidden = photosAvailable
-            motionNotAvailable.isHidden = motionAvailable
-            settingsPrompt.isHidden = false
+            UIView.animate(withDuration: 0.0) {
+                self.cameraNotAvailable.isHidden = self.cameraAvailable
+                self.photosNotAvailable.isHidden = self.photosAvailable
+                self.motionNotAvailable.isHidden = self.motionAvailable
+                self.settingsPrompt.isHidden = false
+            }
         }
     }
 
