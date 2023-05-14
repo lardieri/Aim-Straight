@@ -395,7 +395,7 @@
 			repositoryURL = "https://github.com/rule-of-72/AsynchronousInteractionCoordinator";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
