@@ -55,3 +55,14 @@ extension CMAcceleration {
     }
 
 }
+
+
+extension Double {
+
+    var normalized: Double {
+        let clampedValue = min(1.0, max(-1.0, self))
+        let roundedValue = (clampedValue * 100.0).rounded() / 100.0
+        return roundedValue
+    }
+
+}

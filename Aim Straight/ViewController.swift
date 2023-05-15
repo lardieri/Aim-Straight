@@ -28,6 +28,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         tiltView.translatesAutoresizingMaskIntoConstraints = false
+        tiltView.delegate = self
+
+        addNotificationObservers()
 
         super.viewDidLoad()
     }
@@ -61,15 +64,29 @@ class ViewController: UIViewController {
 
     // MARK: Private methods
 
+    private func addNotificationObservers() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "DidStopPreviewing"), object: nil, queue: nil) { _ in
+            self.stopTrackingMotion()
+            self.motionQueue.cancelAllOperations()
+
+            OperationQueue.main.addOperation {
+                self.tiltView.isHidden = true
+            }
+        }
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "DidStartPreviewing"), object: nil, queue: nil) { _ in
+            self.startTrackingMotion()
+
+            OperationQueue.main.addOperation {
+                self.tiltView.isHidden = false
+            }
+        }
+    }
+
     private func updateUI() {
         assert(resourcesEvaluated == .finished)
 
         if everythingAvailable {
-            if !motionManager.isDeviceMotionActive {
-                motionManager.deviceMotionUpdateInterval = motionUpdateInterval
-                motionManager.startDeviceMotionUpdates(using: .xArbitraryZVertical, to: motionQueue, withHandler: processMotion(motion:error:))
-            }
-
             if presentedViewController == nil {
                 presentImagePicker()
             }
@@ -155,6 +172,9 @@ class ViewController: UIViewController {
         return queue
     } ()
 
+    private var normalizedPitch: Double = 0.0
+    private var normalizedRoll: Double = 0.0
+
 }
 
 
@@ -167,7 +187,6 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
         if let image = info[.editedImage] as? UIImage {
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
         } else if let image = info[.originalImage] as? UIImage {
@@ -196,21 +215,43 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
 fileprivate extension ViewController {
 
-    private func processMotion(motion: CMDeviceMotion?, error: Error?) {
+    private func startTrackingMotion() {
+        guard !motionManager.isDeviceMotionActive else { return }
+
+        motionManager.deviceMotionUpdateInterval = motionUpdateInterval
+        motionManager.startDeviceMotionUpdates(using: .xArbitraryZVertical, to: motionQueue, withHandler: processMotion(motion:error:))
+    }
+
+    private func stopTrackingMotion() {
+        guard motionManager.isDeviceMotionActive else { return }
+
+        motionManager.stopDeviceMotionUpdates()
+    }
+
+    private func processMotion(motion _: CMDeviceMotion?, error: Error?) {
         if let error = error {
             print("Motion error: \(error)")
             return
         }
 
-        guard let motion = motion else {
+        // Always read the latest value.
+        motionQueue.cancelAllOperations()
+        guard let motion = motionManager.deviceMotion else {
             print("Motion error: data is nil")
             return
         }
 
         let gravity = motion.gravity
 
-        tiltView.normalizedRoll = gravity.roll
-        tiltView.normalizedPitch = gravity.pitch
+        let newRoll = gravity.roll.normalized
+        let newPitch = gravity.pitch.normalized
+
+        guard newPitch != normalizedPitch || newRoll != normalizedRoll else { return }
+
+        normalizedPitch = newPitch
+        normalizedRoll = newRoll
+        
+        tiltView.gravityUpdated()
     }
 
     private func printGravity(_ gravity: CMAcceleration) {
@@ -226,6 +267,19 @@ fileprivate extension ViewController {
         let roll = format(gravity.roll)
 
         print("Gravity vector: (x: \(x), y: \(y), z: \(z)  magnitude: \(magnitude)  dominant: \(gravity.dominantAxis)  pitch: \(pitch)  roll: \(roll)")
+    }
+
+}
+
+
+extension ViewController: TiltViewDelegate {
+
+    var pitch: Double {
+        return normalizedPitch
+    }
+
+    var roll: Double {
+        return normalizedRoll
     }
 
 }

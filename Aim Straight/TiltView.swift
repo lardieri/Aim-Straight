@@ -8,52 +8,68 @@
 import UIKit
 import AVFoundation
 
+
+protocol TiltViewDelegate {
+    var pitch: Double { get }
+    var roll: Double { get }
+}
+
+
 @IBDesignable
 class TiltView: UIView {
 
-    let lineWidth: CGFloat = 1.0
-    let thickness: CGFloat = 1.0
-    let strokeColor: CGColor = UIColor.white.cgColor
-    let tiltedFillColor: CGColor = UIColor.red.cgColor
-    let straightfillColor: CGColor = UIColor.green.cgColor
+    // MARK: Constants
 
-    @propertyWrapper
-    struct Normalized {
-        private var value: Double = 0.0
-        var wrappedValue: Double {
-            get {
-                return value
-            }
+    private let lineWidth: CGFloat = 1.0
+    private let thickness: CGFloat = 1.0
+    private let strokeColor: CGColor = UIColor.white.cgColor
+    private let tiltedFillColor: CGColor = UIColor.red.cgColor
+    private let straightfillColor: CGColor = UIColor.green.cgColor
 
-            set {
-                let clampedValue = min(1.0, max(-1.0, newValue))
-                let roundedValue = round(clampedValue * 1000.0) / 1000.0
-                value = roundedValue
-            }
-        }
-    }
+    // MARK: Public properties
 
-    @IBInspectable
-    @Normalized var normalizedPitch: Double {
+    var delegate: TiltViewDelegate? = nil
+
+    @IBInspectable var pitch: Double = 0.0 {
         didSet {
-            if oldValue != normalizedPitch {
-                OperationQueue.main.addOperation {
-                    self.setNeedsDisplay()
-                }
-            }
+            pitch = pitch.normalized
         }
     }
 
-    @IBInspectable
-    @Normalized var normalizedRoll: Double {
+    @IBInspectable var roll: Double = 0.0 {
         didSet {
-            if oldValue != normalizedRoll {
-                OperationQueue.main.addOperation {
-                    self.setNeedsDisplay()
-                }
-            }
+            roll = roll.normalized
         }
     }
+
+    override var isHidden: Bool {
+        didSet {
+            localIsHidden = isHidden
+        }
+    }
+
+    // MARK: Public methods
+
+    func gravityUpdated() {
+        guard !localIsHidden else { return }
+
+        if let lastNeedsDisplayOperation = lastNeedsDisplayOperation {
+            lastNeedsDisplayOperation.cancel()
+        }
+
+        let operation = BlockOperation {
+            if !self.isHidden {
+                self.setNeedsDisplay()
+            }
+        }
+
+        // Let main queue operations that change self.isHidden jump ahead.
+        operation.queuePriority = .low
+        lastNeedsDisplayOperation = operation
+        OperationQueue.main.addOperation(operation)
+    }
+
+    // MARK: View lifecycle methods
 
     override func draw(_ rect: CGRect) {
         guard let ctx = UIGraphicsGetCurrentContext() else { return }
@@ -61,7 +77,10 @@ class TiltView: UIView {
         ctx.saveGState()
         defer { ctx.restoreGState() }
 
-        draw(inContext: ctx)
+        let pitch = delegate?.pitch ?? self.pitch
+        let roll = delegate?.roll ?? self.roll
+
+        draw(inContext: ctx, pitch: pitch, roll: roll)
     }
 
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -79,7 +98,7 @@ class TiltView: UIView {
 
     // MARK: Drawing
 
-    private func draw(inContext ctx: CGContext) {
+    private func draw(inContext ctx: CGContext, pitch: Double, roll: Double) {
         let bounds = self.bounds
         let width = bounds.width
         let height = bounds.height
@@ -92,8 +111,8 @@ class TiltView: UIView {
         let widthOneSixth = width / 6.0
         let heightOneSixth = height / 6.0
 
-        let widthOffset = normalizedPitch * widthOneSixth
-        let heightOffset = normalizedRoll * heightOneSixth
+        let widthOffset = pitch * widthOneSixth
+        let heightOffset = roll * heightOneSixth
 
         // Left vertical bar
         let lvStart = CGPoint(
@@ -142,7 +161,7 @@ class TiltView: UIView {
         ctx.setStrokeColor(strokeColor)
         ctx.setLineWidth(lineWidth)
 
-        if abs(normalizedPitch) < 0.01 {
+        if abs(pitch) < 0.01 {
             ctx.setFillColor(straightfillColor)
         } else {
             ctx.setFillColor(tiltedFillColor)
@@ -166,7 +185,7 @@ class TiltView: UIView {
         ctx.closePath()
         ctx.drawPath(using: .fillStroke)
 
-        if abs(normalizedRoll) < 0.01 {
+        if abs(roll) < 0.01 {
             ctx.setFillColor(straightfillColor)
         } else {
             ctx.setFillColor(tiltedFillColor)
@@ -214,6 +233,11 @@ class TiltView: UIView {
             NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: anchorView, attribute: .height, multiplier: 1.0, constant: 0.0),
         ].forEach { $0.isActive = true }
     }
+
+    // MARK: Private properties
+
+    private var localIsHidden: Bool = false
+    private weak var lastNeedsDisplayOperation: Operation? = nil
 
 }
 
