@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 @IBDesignable
 class TiltView: UIView {
@@ -60,6 +61,25 @@ class TiltView: UIView {
         ctx.saveGState()
         defer { ctx.restoreGState() }
 
+        draw(inContext: ctx)
+    }
+
+    override func willMove(toSuperview newSuperview: UIView?) {
+        clearConstraints()
+    }
+
+    override func didMoveToWindow() {
+        guard window != nil else { return }
+        activateConstraints()
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return nil
+    }
+
+    // MARK: Drawing
+
+    private func draw(inContext ctx: CGContext) {
         let bounds = self.bounds
         let width = bounds.width
         let height = bounds.height
@@ -129,7 +149,7 @@ class TiltView: UIView {
         }
 
         ctx.clear(bounds)
-        
+
         ctx.beginPath()
         ctx.move(to: CGPoint(x: lvStart.x - thickness, y: lvStart.y))
         ctx.addLine(to: CGPoint(x: lvEnd.x - thickness, y: lvEnd.y))
@@ -169,19 +189,62 @@ class TiltView: UIView {
         ctx.drawPath(using: .fillStroke)
     }
 
-    override func willMove(toSuperview newSuperview: UIView?) {
+    // MARK: Layout
+
+    private func clearConstraints() {
         constraints.forEach { $0.isActive = false }
     }
 
-    override func didMoveToSuperview() {
-        if let superview = superview {
-            [
-                NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: superview, attribute: .centerX, multiplier: 1.0, constant: 0.0),
-                NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: superview, attribute: .centerY, multiplier: 1.0, constant: 0.0),
-                NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: superview, attribute: .width, multiplier: 0.8, constant: 0.0),
-                NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: superview, attribute: .height, multiplier: 0.8, constant: 0.0),
-            ].forEach { $0.isActive = true }
+    private func activateConstraints() {
+        guard let cameraPreview = window!.firstSubviewWithLayer(ofType: AVCaptureVideoPreviewLayer.self) else { return }
+        let anchorView: UIView
+
+        // On iPad, the grandparent of the preview applies a transform when the device is rotated.
+        // On iPhone, the preview doesn't take up the full screen.
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            anchorView = cameraPreview.superview!.superview!.superview!
+        } else {
+            anchorView = cameraPreview
         }
+
+        [
+            NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: anchorView, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: anchorView, attribute: .centerY, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: anchorView, attribute: .width, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: anchorView, attribute: .height, multiplier: 1.0, constant: 0.0),
+        ].forEach { $0.isActive = true }
+    }
+
+}
+
+
+// MARK: - Layer search
+
+extension CALayer {
+
+    // Note: does *not* include `self` if `self` is T — that's up to you to figure out.
+    // Call: someLayer.sublayers(ofType: FooLayer.self)
+    func sublayers<T>(ofType t: T.Type) -> [T] where T: CALayer {
+        guard let sublayers = sublayers else { return [] }
+        return sublayers.compactMap { $0 as? T } + sublayers.flatMap { $0.sublayers(ofType: t) }
+    }
+
+}
+
+extension UIView {
+
+    func firstSubviewWithLayer<T>(ofType t: T.Type) -> UIView? where T: CALayer {
+        var layer: CALayer? = self.layer.sublayers(ofType: T.self).first
+
+        while layer != nil {
+            if let view = layer!.delegate as? UIView {
+                return view
+            } else {
+                layer = layer!.superlayer
+            }
+        }
+
+        return nil
     }
 
 }
