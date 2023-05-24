@@ -15,6 +15,8 @@
 		DFE2212029EDF8940057B9B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE2211E29EDF8940057B9B1 /* Main.storyboard */; };
 		DFE2212229EDF8980057B9B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFE2212129EDF8980057B9B1 /* Assets.xcassets */; };
 		DFE2212529EDF8980057B9B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE2212329EDF8980057B9B1 /* LaunchScreen.storyboard */; };
+		DFECD9902A1D94DA003D3D0C /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFECD98F2A1D94DA003D3D0C /* OverlayView.swift */; };
+		DFECD9922A1D95F4003D3D0C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFECD9912A1D95F4003D3D0C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		DFE2212129EDF8980057B9B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFE2212429EDF8980057B9B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DFE2212629EDF8980057B9B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFECD98F2A1D94DA003D3D0C /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		DFECD9912A1D95F4003D3D0C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +65,11 @@
 			isa = PBXGroup;
 			children = (
 				DFE2211829EDF8940057B9B1 /* AppDelegate.swift */,
-				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
-				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
+				DFECD9912A1D95F4003D3D0C /* Extensions.swift */,
+				DFECD98F2A1D94DA003D3D0C /* OverlayView.swift */,
 				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
+				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
+				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
 				DFE2211E29EDF8940057B9B1 /* Main.storyboard */,
 				DFE2212129EDF8980057B9B1 /* Assets.xcassets */,
 				DFE2212329EDF8980057B9B1 /* LaunchScreen.storyboard */,
@@ -150,9 +156,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */,
+				DFECD9922A1D95F4003D3D0C /* Extensions.swift in Sources */,
 				DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */,
 				DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */,
 				DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */,
+				DFECD9902A1D94DA003D3D0C /* OverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

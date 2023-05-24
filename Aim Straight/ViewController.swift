@@ -22,13 +22,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var photosNotAvailable: UILabel!
     @IBOutlet weak var motionNotAvailable: UILabel!
     @IBOutlet weak var settingsPrompt: UIStackView!
-    @IBOutlet var tiltView: TiltView!
+    @IBOutlet weak var overlayView: OverlayView!
 
     // MARK: Life cycle
 
     override func viewDidLoad() {
-        tiltView.translatesAutoresizingMaskIntoConstraints = false
-        tiltView.delegate = self
+        overlayView.tiltViewDelegate = self
 
         addNotificationObservers()
 
@@ -70,7 +69,7 @@ class ViewController: UIViewController {
             self.motionQueue.cancelAllOperations()
 
             OperationQueue.main.addOperation {
-                self.tiltView.isHidden = true
+                self.overlayView.isHidden = true
             }
         }
 
@@ -78,7 +77,7 @@ class ViewController: UIViewController {
             self.startTrackingMotion()
 
             OperationQueue.main.addOperation {
-                self.tiltView.isHidden = false
+                self.overlayView.isHidden = false
             }
         }
     }
@@ -115,7 +114,7 @@ class ViewController: UIViewController {
             imagePicker.cameraDevice = .front
         }
 
-        imagePicker.cameraOverlayView = tiltView
+        imagePicker.cameraOverlayView = overlayView
 
         present(imagePicker, animated: false, completion: nil)
     }
@@ -251,7 +250,7 @@ fileprivate extension ViewController {
         normalizedPitch = newPitch
         normalizedRoll = newRoll
         
-        tiltView.gravityUpdated()
+        overlayView.gravityUpdated()
     }
 
     private func printGravity(_ gravity: CMAcceleration) {

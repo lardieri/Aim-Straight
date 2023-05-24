@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 
 protocol TiltViewDelegate {
@@ -29,6 +28,7 @@ class TiltView: UIView {
     // MARK: Public properties
 
     var delegate: TiltViewDelegate? = nil
+    var overlayIsHidden: Bool = false
 
     @IBInspectable var pitch: Double = 0.0 {
         didSet {
@@ -42,16 +42,10 @@ class TiltView: UIView {
         }
     }
 
-    override var isHidden: Bool {
-        didSet {
-            localIsHidden = isHidden
-        }
-    }
-
     // MARK: Public methods
 
     func gravityUpdated() {
-        guard !localIsHidden else { return }
+        guard !overlayIsHidden else { return }
 
         if let lastNeedsDisplayOperation = lastNeedsDisplayOperation {
             lastNeedsDisplayOperation.cancel()
@@ -81,19 +75,6 @@ class TiltView: UIView {
         let roll = delegate?.roll ?? self.roll
 
         draw(inContext: ctx, pitch: pitch, roll: roll)
-    }
-
-    override func willMove(toSuperview newSuperview: UIView?) {
-        clearConstraints()
-    }
-
-    override func didMoveToWindow() {
-        guard window != nil else { return }
-        activateConstraints()
-    }
-
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return nil
     }
 
     // MARK: Drawing
@@ -208,67 +189,8 @@ class TiltView: UIView {
         ctx.drawPath(using: .fillStroke)
     }
 
-    // MARK: Layout
-
-    private func clearConstraints() {
-        constraints.forEach { $0.isActive = false }
-    }
-
-    private func activateConstraints() {
-        guard let cameraPreview = window!.firstSubviewWithLayer(ofType: AVCaptureVideoPreviewLayer.self) else { return }
-        let anchorView: UIView
-
-        // On iPad, the grandparent of the preview applies a transform when the device is rotated.
-        // On iPhone, the preview doesn't take up the full screen.
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            anchorView = cameraPreview.superview!.superview!.superview!
-        } else {
-            anchorView = cameraPreview
-        }
-
-        [
-            NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: anchorView, attribute: .centerX, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: anchorView, attribute: .centerY, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: anchorView, attribute: .width, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: anchorView, attribute: .height, multiplier: 1.0, constant: 0.0),
-        ].forEach { $0.isActive = true }
-    }
-
     // MARK: Private properties
 
-    private var localIsHidden: Bool = false
     private weak var lastNeedsDisplayOperation: Operation? = nil
-
-}
-
-
-// MARK: - Layer search
-
-extension CALayer {
-
-    // Note: does *not* include `self` if `self` is T — that's up to you to figure out.
-    // Call: someLayer.sublayers(ofType: FooLayer.self)
-    func sublayers<T>(ofType t: T.Type) -> [T] where T: CALayer {
-        guard let sublayers = sublayers else { return [] }
-        return sublayers.compactMap { $0 as? T } + sublayers.flatMap { $0.sublayers(ofType: t) }
-    }
-
-}
-
-extension UIView {
-
-    func firstSubviewWithLayer<T>(ofType t: T.Type) -> UIView? where T: CALayer {
-        var layer: CALayer? = self.layer.sublayers(ofType: T.self).first
-
-        while layer != nil {
-            if let view = layer!.delegate as? UIView {
-                return view
-            } else {
-                layer = layer!.superlayer
-            }
-        }
-
-        return nil
-    }
 
 }

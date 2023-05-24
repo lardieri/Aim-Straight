@@ -78,23 +78,33 @@
                     <connections>
                         <outlet property="cameraNotAvailable" destination="INN-Y4-eWo" id="h1g-wp-PWq"/>
                         <outlet property="motionNotAvailable" destination="X00-tE-3Uu" id="CkN-9N-uX1"/>
+                        <outlet property="overlayView" destination="JyK-Nu-QhS" id="YaU-Fb-nZZ"/>
                         <outlet property="photosNotAvailable" destination="qb6-Xw-tU0" id="UFQ-bM-vgi"/>
                         <outlet property="settingsPrompt" destination="M4U-r0-bHy" id="818-Tb-2YE"/>
-                        <outlet property="tiltView" destination="cRm-DN-0Lp" id="tJq-4J-ay3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <view opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-DN-0Lp" customClass="TiltView" customModule="Aim_Straight" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyK-Nu-QhS" userLabel="Overlay view" customClass="OverlayView" customModule="Aim_Straight" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
+                    <subviews>
+                        <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-DN-0Lp" customClass="TiltView" customModule="Aim_Straight" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="25" width="300" height="300"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="pitch">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="roll">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="pitch">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="roll">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="tiltView" destination="cRm-DN-0Lp" id="KNu-og-OKb"/>
+                    </connections>
                 </view>
             </objects>
             <point key="canvasLocation" x="20" y="84"/>
