@@ -20,9 +20,10 @@ class TiltView: UIView {
     // MARK: Constants
 
     private let lineWidth: CGFloat = 1.0
-    private let thickness: CGFloat = 1.0
-    private let strokeColor: CGColor = UIColor.white.cgColor
-    private let tiltedFillColor: CGColor = UIColor.red.cgColor
+    private let thickness: CGFloat = 2.0
+    private let tiltedStrokeColor: CGColor = UIColor.red.cgColor
+    private let straightStrokeColor: CGColor = UIColor.white.cgColor
+    private let tiltedFillColor: CGColor = UIColor.white.cgColor
     private let straightfillColor: CGColor = UIColor.green.cgColor
 
     // MARK: Public properties
@@ -80,6 +81,17 @@ class TiltView: UIView {
     // MARK: Drawing
 
     private func draw(inContext ctx: CGContext, pitch: Double, roll: Double) {
+        
+        func setColor(forAngle angle: Double) {
+            if abs(angle) < 0.01 {
+                ctx.setStrokeColor(straightStrokeColor)
+                ctx.setFillColor(straightfillColor)
+            } else {
+                ctx.setStrokeColor(tiltedStrokeColor)
+                ctx.setFillColor(tiltedFillColor)
+            }
+        }
+
         let bounds = self.bounds
         let width = bounds.width
         let height = bounds.height
@@ -139,14 +151,8 @@ class TiltView: UIView {
             y: heightTwoThirds - heightOffset
         )
 
-        ctx.setStrokeColor(strokeColor)
         ctx.setLineWidth(lineWidth)
-
-        if abs(pitch) < 0.01 {
-            ctx.setFillColor(straightfillColor)
-        } else {
-            ctx.setFillColor(tiltedFillColor)
-        }
+        setColor(forAngle: pitch)
 
         ctx.clear(bounds)
 
@@ -166,11 +172,7 @@ class TiltView: UIView {
         ctx.closePath()
         ctx.drawPath(using: .fillStroke)
 
-        if abs(roll) < 0.01 {
-            ctx.setFillColor(straightfillColor)
-        } else {
-            ctx.setFillColor(tiltedFillColor)
-        }
+        setColor(forAngle: roll)
 
         ctx.beginPath()
         ctx.move(to: CGPoint(x: thStart.x, y: thStart.y - thickness))
