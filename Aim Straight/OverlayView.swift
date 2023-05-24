@@ -29,6 +29,13 @@ class OverlayView: UIView {
         guard window != nil else { return }
         self.frame = superview!.bounds
         activateConstraints()
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let maskView = Self.createMaskView()
+            maskView.frame = tiltView!.bounds
+            maskView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            tiltView!.mask = maskView
+        }
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -82,6 +89,48 @@ extension OverlayView {
         set {
             tiltView!.delegate = newValue
         }
+    }
+
+}
+
+
+extension OverlayView {
+
+    private static func createMaskView() -> UIView {
+        let zoomWidth = 64.0
+        let opaqueWidth = 1.0
+        let controlsWidth = 112.0
+
+        let width = zoomWidth + opaqueWidth + controlsWidth
+        let height = 1.0
+        let size = CGSize(width: width, height: height)
+        let bounds = CGRect(origin: .zero, size: size)
+
+        let opaqueOrigin = CGPoint(x: zoomWidth, y: 0.0)
+        let opaqueSize = CGSize(width: opaqueWidth, height: height)
+        let opaqueBounds = CGRect(origin: opaqueOrigin, size: opaqueSize)
+
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
+        let ctx = UIGraphicsGetCurrentContext()!
+        ctx.setShouldAntialias(false)
+
+        ctx.clear(bounds)
+
+        ctx.setFillColor(gray: 1.0, alpha: 1.0)
+        ctx.fill([opaqueBounds])
+
+        let originalImage = UIGraphicsGetImageFromCurrentImageContext()!
+
+        UIGraphicsEndImageContext()
+
+        let capInsets = UIEdgeInsets(top: 0.0, left: zoomWidth, bottom: 0.0, right: controlsWidth)
+        let maskImage = originalImage.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
+
+        let maskView = UIImageView(image: maskImage)
+        maskView.contentMode = .scaleToFill
+
+        return maskView
     }
 
 }

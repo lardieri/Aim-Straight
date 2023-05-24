@@ -84,7 +84,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyK-Nu-QhS" userLabel="Overlay view" customClass="OverlayView" customModule="Aim_Straight" customModuleProvider="target">
+                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyK-Nu-QhS" userLabel="Overlay view" customClass="OverlayView" customModule="Aim_Straight" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-DN-0Lp" customClass="TiltView" customModule="Aim_Straight" customModuleProvider="target">
