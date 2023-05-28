@@ -334,21 +334,21 @@ fileprivate extension ViewController {
     }
 
     private func evaluatePhotoLibraryAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
-        if #unavailable(iOS 14) {
-            PHPhotoLibrary.requestAuthorization() { status in
-                OperationQueue.main.addOperation {
-                    self.photosAvailable = (status == .authorized)
-                    finished()
-                }
-            }
-        } else {
+        if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
                 OperationQueue.main.addOperation {
                     self.photosAvailable = (status == .authorized)
                     finished()
                 }
             }
-        }
+        } else {
+            PHPhotoLibrary.requestAuthorization() { status in
+                OperationQueue.main.addOperation {
+                    self.photosAvailable = (status == .authorized)
+                    finished()
+                }
+            }
+        } 
     }
 
     private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
