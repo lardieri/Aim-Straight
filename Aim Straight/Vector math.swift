@@ -16,42 +16,13 @@ extension CMAcceleration {
         )
     }
 
-    enum Axis {
-        case x
-        case y
-        case z
-    }
+}
 
-    var dominantAxis: Axis {
-        if abs(x) > abs(y) && abs(x) > abs(z) { return .x }
-        if abs(y) > abs(x) && abs(y) > abs(z) { return .y }
-        return .z
-    }
 
-    var pitch: Double {
-        switch dominantAxis {
-            case .x:
-                return z
+extension CMAcceleration: Equatable {
 
-            case .y:
-                return z
-
-            case .z:
-                return x
-        }
-    }
-
-    var roll: Double {
-        switch dominantAxis {
-            case .x:
-                return y
-
-            case .y:
-                return x
-
-            case .z:
-                return y
-        }
+    public static func == (lhs: CMAcceleration, rhs: CMAcceleration) -> Bool {
+        lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
     }
 
 }
@@ -59,7 +30,7 @@ extension CMAcceleration {
 
 extension Double {
 
-    var normalized: Double {
+    var clamped: Double {
         let clampedValue = min(1.0, max(-1.0, self))
         let roundedValue = (clampedValue * 100.0).rounded() / 100.0
         return roundedValue

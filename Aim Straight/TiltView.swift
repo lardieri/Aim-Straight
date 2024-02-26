@@ -7,13 +7,6 @@
 
 import UIKit
 
-
-protocol TiltViewDelegate {
-    var pitch: Double { get }
-    var roll: Double { get }
-}
-
-
 @IBDesignable
 class TiltView: UIView {
 
@@ -28,52 +21,59 @@ class TiltView: UIView {
 
     // MARK: Public properties
 
-    var delegate: TiltViewDelegate? = nil
+    var viewModel: ViewModel? = nil {
+        willSet {
+            viewModel?.delegate = nil
+        }
+
+        didSet {
+            viewModel?.delegate = self
+        }
+    }
+
     var overlayIsHidden: Bool = false
+
+    // MARK: Design-time properties
+
+#if TARGET_INTERFACE_BUILDER
 
     @IBInspectable var pitch: Double = 0.0 {
         didSet {
-            pitch = pitch.normalized
+            pitch = pitch.clamped
         }
     }
 
     @IBInspectable var roll: Double = 0.0 {
         didSet {
-            roll = roll.normalized
+            roll = roll.clamped
         }
     }
 
-    // MARK: Public methods
-
-    func gravityUpdated() {
-        guard !overlayIsHidden else { return }
-
-        if let lastNeedsDisplayOperation = lastNeedsDisplayOperation {
-            lastNeedsDisplayOperation.cancel()
-        }
-
-        let operation = BlockOperation {
-            if !self.isHidden {
-                self.setNeedsDisplay()
-            }
-        }
-
-        // Let main queue operations that change self.isHidden jump ahead.
-        operation.queuePriority = .low
-        lastNeedsDisplayOperation = operation
-        OperationQueue.main.addOperation(operation)
-    }
+#endif
 
     // MARK: View lifecycle methods
 
     override func draw(_ rect: CGRect) {
+        let pitch: Double
+        let roll: Double
+
+#if TARGET_INTERFACE_BUILDER
+
+        pitch = self.pitch
+        roll = self.roll
+
+#else
+
+        guard let attitude = viewModel?.getCurrentAttitude() else { return }
+        pitch = attitude.pitch
+        roll = attitude.roll
+
+#endif
+
         guard let ctx = UIGraphicsGetCurrentContext() else { return }
 
         ctx.saveGState()
         defer { ctx.restoreGState() }
-
-        let pitch = delegate?.pitch ?? self.pitch
-        let roll = delegate?.roll ?? self.roll
 
         draw(inContext: ctx, pitch: pitch, roll: roll)
     }
@@ -194,5 +194,29 @@ class TiltView: UIView {
     // MARK: Private properties
 
     private weak var lastNeedsDisplayOperation: Operation? = nil
+
+}
+
+
+extension TiltView: ViewModelDelegate {
+
+    func viewModelUpdated() {
+        guard !overlayIsHidden else { return }
+
+        if let lastNeedsDisplayOperation = lastNeedsDisplayOperation {
+            lastNeedsDisplayOperation.cancel()
+        }
+
+        let operation = BlockOperation {
+            if !self.isHidden {
+                self.setNeedsDisplay()
+            }
+        }
+
+        // Let main queue operations that change self.isHidden jump ahead.
+        operation.queuePriority = .low
+        lastNeedsDisplayOperation = operation
+        OperationQueue.main.addOperation(operation)
+    }
 
 }

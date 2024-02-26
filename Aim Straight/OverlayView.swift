@@ -47,12 +47,6 @@ class OverlayView: UIView {
         return nil
     }
 
-    // MARK: Public methods
-
-    func gravityUpdated() {
-        tiltView!.gravityUpdated()
-    }
-
     // MARK: Layout
 
     private func clearConstraints() {
@@ -86,13 +80,13 @@ class OverlayView: UIView {
 
 extension OverlayView {
 
-    var tiltViewDelegate: TiltViewDelegate? {
+    var viewModel: ViewModel? {
         get {
-            return tiltView!.delegate
+            return tiltView!.viewModel
         }
 
         set {
-            tiltView!.delegate = newValue
+            tiltView!.viewModel = newValue
         }
     }
 

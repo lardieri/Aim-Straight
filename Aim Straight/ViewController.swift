@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     // MARK: Life cycle
 
     override func viewDidLoad() {
-        overlayView.tiltViewDelegate = self
+        overlayView.viewModel = viewModel
 
         addNotificationObservers()
 
@@ -171,8 +171,7 @@ class ViewController: UIViewController {
         return queue
     } ()
 
-    private var normalizedPitch: Double = 0.0
-    private var normalizedRoll: Double = 0.0
+    private let viewModel = ViewModel()
 
 }
 
@@ -240,45 +239,7 @@ fileprivate extension ViewController {
             return
         }
 
-        let gravity = motion.gravity
-
-        let newRoll = gravity.roll.normalized
-        let newPitch = gravity.pitch.normalized
-
-        guard newPitch != normalizedPitch || newRoll != normalizedRoll else { return }
-
-        normalizedPitch = newPitch
-        normalizedRoll = newRoll
-        
-        overlayView.gravityUpdated()
-    }
-
-    private func printGravity(_ gravity: CMAcceleration) {
-        func format(_ d: Double) -> String {
-            return String(format: "%+.2f", d)
-        }
-
-        let x = format(gravity.x)
-        let y = format(gravity.y)
-        let z = format(gravity.z)
-        let magnitude = format(gravity.magnitude)
-        let pitch = format(gravity.pitch)
-        let roll = format(gravity.roll)
-
-        print("Gravity vector: (x: \(x), y: \(y), z: \(z)  magnitude: \(magnitude)  dominant: \(gravity.dominantAxis)  pitch: \(pitch)  roll: \(roll)")
-    }
-
-}
-
-
-extension ViewController: TiltViewDelegate {
-
-    var pitch: Double {
-        return normalizedPitch
-    }
-
-    var roll: Double {
-        return normalizedRoll
+        viewModel.gravity = motion.gravity
     }
 
 }
