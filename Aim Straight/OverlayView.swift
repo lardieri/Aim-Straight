@@ -12,6 +12,13 @@ import AVFoundation
 class OverlayView: UIView {
 
     @IBOutlet weak var tiltView: TiltView?
+    @IBOutlet weak var diagnosticView: DiagnosticView? {
+        didSet {
+            #if DEBUG
+            diagnosticView?.isHidden = false
+            #endif
+        }
+    }
 
     // MARK: View lifecycle
 
@@ -80,11 +87,13 @@ class OverlayView: UIView {
     var viewModel: ViewModel? = nil {
         willSet {
             viewModel?.delegate = nil
+            diagnosticView?.viewModel = nil
             tiltView?.viewModel = nil
         }
 
         didSet {
             tiltView?.viewModel = viewModel
+            diagnosticView?.viewModel = viewModel
             viewModel?.delegate = self
         }
     }
@@ -149,6 +158,7 @@ extension OverlayView: ViewModelDelegate {
         let operation = BlockOperation {
             if !self.isHidden {
                 self.tiltView?.setNeedsDisplay()
+                self.diagnosticView?.update()
             }
         }
 

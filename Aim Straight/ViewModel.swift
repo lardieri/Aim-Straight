@@ -20,25 +20,35 @@ class ViewModel {
         let roll: Double
     }
 
+    struct ExtendedAttitude {
+        let attitude: Attitude
+
+        let axis: DeviceAxis
+        let sign: FloatingPointSign
+
+        let gravityX: Double
+        let gravityY: Double
+        let gravityZ: Double
+    }
+
     weak var delegate: ViewModelDelegate?
 
     var gravity = CMAcceleration() {
         didSet {
             guard gravity != oldValue else { return }
-
-#if DEBUG
-            Self.printAttitude(gravity: gravity)
-#endif
-
             delegate?.viewModelUpdated()
         }
     }
 
     func getCurrentAttitude() -> Attitude {
+        return Self.attitude(gravity: self.gravity).attitude
+    }
+
+    func getExtendedAttitude() -> ExtendedAttitude {
         return Self.attitude(gravity: self.gravity)
     }
 
-    fileprivate enum DeviceAxis {
+    enum DeviceAxis {
         case X // Volume button (-) to power button (+)
         case Y // Home button (-) to front camera (+)
         case Z // Apple logo (-) to the screen (+)
@@ -52,7 +62,7 @@ class ViewModel {
         return (.Z, (-gravity.z).sign)
     }
 
-    private static func attitude(gravity: CMAcceleration) -> Attitude {
+    private static func attitude(gravity: CMAcceleration) -> ExtendedAttitude {
         let (axis, sign) = deviceAxisPointingUp(gravity)
 
         let (pitch, roll) = switch (axis, sign) {
@@ -68,23 +78,8 @@ class ViewModel {
         let normalizedRoll = roll.clamped
 
         let attitude = Attitude(pitch: normalizedPitch, roll: normalizedRoll)
-        return attitude
-    }
-
-    private static func printAttitude(gravity: CMAcceleration) {
-        func format(_ d: Double) -> String {
-            return String(format: "%+.2f", d)
-        }
-
-        let x = format(gravity.x)
-        let y = format(gravity.y)
-        let z = format(gravity.z)
-        let (axis, sign) = deviceAxisPointingUp(gravity)
-        let attitude = attitude(gravity: gravity)
-        let pitch = format(attitude.pitch)
-        let roll = format(attitude.roll)
-
-        print("Gravity vector: (x: \(x), y: \(y), z: \(z))  Axis pointing up: \(sign)\(axis)  Pitch: \(pitch)  Roll: \(roll)")
+        let extendedAttitude = ExtendedAttitude(attitude: attitude, axis: axis, sign: sign, gravityX: gravity.x, gravityY: gravity.y, gravityZ: gravity.z)
+        return extendedAttitude
     }
 
 }
