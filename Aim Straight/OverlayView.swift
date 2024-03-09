@@ -75,20 +75,23 @@ class OverlayView: UIView {
         ].forEach { $0.isActive = true }
     }
 
-}
+    // MARK: Public properties
 
-
-extension OverlayView {
-
-    var viewModel: ViewModel? {
-        get {
-            return tiltView!.viewModel
+    var viewModel: ViewModel? = nil {
+        willSet {
+            viewModel?.delegate = nil
+            tiltView?.viewModel = nil
         }
 
-        set {
-            tiltView!.viewModel = newValue
+        didSet {
+            tiltView?.viewModel = viewModel
+            viewModel?.delegate = self
         }
     }
+
+    // MARK: Private properties
+
+    private weak var lastNeedsDisplayOperation: Operation? = nil
 
 }
 
@@ -130,6 +133,29 @@ extension OverlayView {
         maskView.contentMode = .scaleToFill
 
         return maskView
+    }
+
+}
+
+
+extension OverlayView: ViewModelDelegate {
+
+    func viewModelUpdated() {
+        if let lastNeedsDisplayOperation = lastNeedsDisplayOperation,
+           !lastNeedsDisplayOperation.isFinished {
+            return
+        }
+
+        let operation = BlockOperation {
+            if !self.isHidden {
+                self.tiltView?.setNeedsDisplay()
+            }
+        }
+
+        // Let main queue operations that change self.isHidden jump ahead.
+        operation.queuePriority = .low
+        lastNeedsDisplayOperation = operation
+        OperationQueue.main.addOperation(operation)
     }
 
 }

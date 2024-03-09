@@ -19,19 +19,11 @@ class TiltView: UIView {
     private let tiltedFillColor: CGColor = UIColor.white.cgColor
     private let straightfillColor: CGColor = UIColor.green.cgColor
 
+    var overlayIsHidden: Bool = false
+
     // MARK: Public properties
 
-    var viewModel: ViewModel? = nil {
-        willSet {
-            viewModel?.delegate = nil
-        }
-
-        didSet {
-            viewModel?.delegate = self
-        }
-    }
-
-    var overlayIsHidden: Bool = false
+    var viewModel: ViewModel? = nil
 
     // MARK: Design-time properties
 
@@ -189,34 +181,6 @@ class TiltView: UIView {
         ctx.addLine(to: CGPoint(x: bhStart.x, y: bhStart.y + thickness))
         ctx.closePath()
         ctx.drawPath(using: .fillStroke)
-    }
-
-    // MARK: Private properties
-
-    private weak var lastNeedsDisplayOperation: Operation? = nil
-
-}
-
-
-extension TiltView: ViewModelDelegate {
-
-    func viewModelUpdated() {
-        guard !overlayIsHidden else { return }
-
-        if let lastNeedsDisplayOperation = lastNeedsDisplayOperation {
-            lastNeedsDisplayOperation.cancel()
-        }
-
-        let operation = BlockOperation {
-            if !self.isHidden {
-                self.setNeedsDisplay()
-            }
-        }
-
-        // Let main queue operations that change self.isHidden jump ahead.
-        operation.queuePriority = .low
-        lastNeedsDisplayOperation = operation
-        OperationQueue.main.addOperation(operation)
     }
 
 }
