@@ -35,6 +35,9 @@ class ViewModel {
 
     var gravity = CMAcceleration() {
         didSet {
+            let clampedGravity = CMAcceleration(x: gravity.x.clamped, y: gravity.y.clamped, z: gravity.z.clamped)
+            gravity = clampedGravity
+            
             guard gravity != oldValue else { return }
             delegate?.viewModelUpdated()
         }
@@ -74,10 +77,7 @@ class ViewModel {
             case (.Z, .minus): (pitch:  gravity.y, roll:  gravity.x)
         }
 
-        let normalizedPitch = pitch.clamped
-        let normalizedRoll = roll.clamped
-
-        let attitude = Attitude(pitch: normalizedPitch, roll: normalizedRoll)
+        let attitude = Attitude(pitch: pitch, roll: roll)
         let extendedAttitude = ExtendedAttitude(attitude: attitude, axis: axis, sign: sign, gravityX: gravity.x, gravityY: gravity.y, gravityZ: gravity.z)
         return extendedAttitude
     }
