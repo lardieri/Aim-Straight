@@ -38,6 +38,11 @@ class OverlayView: UIView {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        tiltView!.mask?.frame = tiltView!.bounds
+    }
+
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         return nil
     }
