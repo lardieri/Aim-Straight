@@ -69,11 +69,11 @@ class ViewModel {
         let (axis, sign) = deviceAxisPointingUp(gravity)
 
         let (pitch, roll) = switch (axis, sign) {
-            case (.X, .plus):  (pitch:  gravity.z, roll: -gravity.y)
-            case (.X, .minus): (pitch:  gravity.z, roll:  gravity.y)
-            case (.Y, .plus):  (pitch:  gravity.z, roll:  gravity.x)
-            case (.Y, .minus): (pitch:  gravity.z, roll: -gravity.x)
-            case (.Z, .plus):  (pitch: -gravity.y, roll:  gravity.x)
+            case (.X, .plus):  (pitch: -gravity.y, roll:  gravity.z)
+            case (.X, .minus): (pitch: -gravity.y, roll: -gravity.z)
+            case (.Y, .plus):  (pitch:  gravity.z, roll: -gravity.x)
+            case (.Y, .minus): (pitch: -gravity.z, roll: -gravity.x)
+            case (.Z, .plus):  (pitch: -gravity.y, roll: -gravity.x)
             case (.Z, .minus): (pitch:  gravity.y, roll:  gravity.x)
         }
 

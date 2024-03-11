@@ -7,17 +7,24 @@
 
 import UIKit
 
+// MARK: - Constants
+
+fileprivate let strokeThickness: CGFloat = 1.0
+fileprivate let fillThickness: CGFloat = 2.0
+fileprivate let majorThickness = strokeThickness + fillThickness
+fileprivate let minorThickness = fillThickness
+fileprivate let majorOffset = majorThickness / 2.0
+fileprivate let minorOffset = minorThickness / 2.0
+
+fileprivate let tiltedStrokeColor: CGColor = UIColor.red.cgColor
+fileprivate let straightStrokeColor: CGColor = UIColor.white.cgColor
+fileprivate let tiltedFillColor: CGColor = UIColor.white.cgColor
+fileprivate let straightfillColor: CGColor = UIColor.green.cgColor
+
+// MARK: -
+
 @IBDesignable
 class TiltView: UIView {
-
-    // MARK: Constants
-
-    private let lineWidth: CGFloat = 1.0
-    private let thickness: CGFloat = 2.0
-    private let tiltedStrokeColor: CGColor = UIColor.red.cgColor
-    private let straightStrokeColor: CGColor = UIColor.white.cgColor
-    private let tiltedFillColor: CGColor = UIColor.white.cgColor
-    private let straightfillColor: CGColor = UIColor.green.cgColor
 
     var overlayIsHidden: Bool = false
 
@@ -73,9 +80,11 @@ class TiltView: UIView {
     // MARK: Drawing
 
     private func draw(inContext ctx: CGContext, pitch: Double, roll: Double) {
-        
-        func setColor(forAngle angle: Double) {
-            if abs(angle) < 0.01 {
+        let screen = self.window!.screen
+        let fixedBounds = self.coordinateSpace.convert(bounds, to: screen.fixedCoordinateSpace)
+
+        func setColor(forDeviation deviation: Double) {
+            if abs(deviation) < 0.01 {
                 ctx.setStrokeColor(straightStrokeColor)
                 ctx.setFillColor(straightfillColor)
             } else {
@@ -84,103 +93,118 @@ class TiltView: UIView {
             }
         }
 
-        let bounds = self.bounds
-        let width = bounds.width
-        let height = bounds.height
+        func toViewCoordinates(_ screenPoint: CGPoint) -> CGPoint {
+            self.coordinateSpace.convert(screenPoint, from: screen.fixedCoordinateSpace)
+        }
 
-        let widthOneThird = (width / 3.0) + bounds.origin.x
-        let widthTwoThirds = (width * 2.0 / 3.0) + bounds.origin.x
-        let heightOneThird = (height / 3.0) + bounds.origin.y
-        let heightTwoThirds = (height * 2.0 / 3.0) + bounds.origin.y
+        func drawPolygon(_ screenPoints: [CGPoint]) {
+            ctx.beginPath()
+            ctx.addLines(between: screenPoints.map { toViewCoordinates($0) } )
+            ctx.closePath()
+            ctx.drawPath(using: .fillStroke)
+        }
 
-        let widthOneSixth = width / 6.0
-        let heightOneSixth = height / 6.0
+        let leftEdge = fixedBounds.minX
+        let rightEdge = fixedBounds.maxX
+        let topEdge = fixedBounds.minY
+        let bottomEdge = fixedBounds.maxY
+        let width = fixedBounds.width
+        let height = fixedBounds.height
 
-        let widthOffset = pitch * widthOneSixth
-        let heightOffset = roll * heightOneSixth
+        let leftPitchCenter = leftEdge + (width / 3.0)
+        let rightPitchCenter = rightEdge - (width / 3.0)
+        let topRollCenter = topEdge + (height / 3.0)
+        let bottomRollCenter = bottomEdge - (height / 3.0)
 
-        // Left vertical bar
-        let lvStart = CGPoint(
-            x: widthOneThird + widthOffset,
-            y: bounds.minY
+        let pitchMaxOffset = width / 8.0
+        let rollMaxOffset = height / 8.0
+
+        let pitchOffset = pitch * pitchMaxOffset
+        let rollOffset = roll * rollMaxOffset
+
+        // Left pitch bar
+        let leftPitchStart = CGPoint(
+            x: leftPitchCenter + pitchOffset,
+            y: topEdge
         )
 
-        let lvEnd = CGPoint(
-            x: widthOneThird - widthOffset,
-            y: bounds.maxY
+        let leftPitchEnd = CGPoint(
+            x: leftPitchCenter - pitchOffset,
+            y: bottomEdge
         )
 
-        // Right vertical bar
-        let rvStart = CGPoint(
-            x: widthTwoThirds - widthOffset,
-            y: bounds.minY
+        let leftPitchPoints: [CGPoint] = [
+            CGPoint(x: leftPitchStart.x - majorOffset, y: leftPitchStart.y + minorOffset),
+            CGPoint(x: leftPitchEnd.x - majorOffset, y: leftPitchEnd.y - minorOffset),
+            CGPoint(x: leftPitchEnd.x + majorOffset, y: leftPitchEnd.y - minorOffset),
+            CGPoint(x: leftPitchStart.x + majorOffset, y: leftPitchStart.y + minorOffset)
+        ]
+
+        // Right pitch bar
+        let rightPitchStart = CGPoint(
+            x: rightPitchCenter - pitchOffset,
+            y: topEdge
         )
 
-        let rvEnd = CGPoint(
-            x: widthTwoThirds + widthOffset,
-            y: bounds.maxY
+        let rightPitchEnd = CGPoint(
+            x: rightPitchCenter + pitchOffset,
+            y: bottomEdge
         )
 
-        // Top horizontal bar
-        let thStart = CGPoint(
-            x: bounds.minX,
-            y: heightOneThird - heightOffset
+        let rightPitchPoints: [CGPoint] = [
+            CGPoint(x: rightPitchStart.x - majorOffset, y: rightPitchStart.y + minorOffset),
+            CGPoint(x: rightPitchEnd.x - majorOffset, y: rightPitchEnd.y - minorOffset),
+            CGPoint(x: rightPitchEnd.x + majorOffset, y: rightPitchEnd.y - minorOffset),
+            CGPoint(x: rightPitchStart.x + majorOffset, y: rightPitchStart.y + minorOffset)
+        ]
+
+        // Top roll bar
+        let topRollStart = CGPoint(
+            x: leftEdge,
+            y: topRollCenter - rollOffset
         )
 
-        let thEnd = CGPoint(
-            x: bounds.maxX,
-            y: heightOneThird + heightOffset
+        let topRollEnd = CGPoint(
+            x: rightEdge,
+            y: topRollCenter + rollOffset
         )
 
-        // Bottom horizontal bar
-        let bhStart = CGPoint(
-            x: bounds.minX,
-            y: heightTwoThirds + heightOffset
+        let topRollPoints: [CGPoint] = [
+            CGPoint(x: topRollStart.x + minorOffset, y: topRollStart.y - majorOffset),
+            CGPoint(x: topRollEnd.x - minorOffset, y: topRollEnd.y - majorOffset),
+            CGPoint(x: topRollEnd.x - minorOffset, y: topRollEnd.y + majorOffset),
+            CGPoint(x: topRollStart.x + minorOffset, y: topRollStart.y + majorOffset)
+        ]
+
+        // Bottom roll bar
+        let bottomRollStart = CGPoint(
+            x: leftEdge,
+            y: bottomRollCenter + rollOffset
         )
 
-        let bhEnd = CGPoint(
-            x: bounds.maxX,
-            y: heightTwoThirds - heightOffset
+        let bottomRollEnd = CGPoint(
+            x: rightEdge,
+            y: bottomRollCenter - rollOffset
         )
 
-        ctx.setLineWidth(lineWidth)
-        setColor(forAngle: pitch)
+        let bottomRollPoints: [CGPoint] = [
+            CGPoint(x: bottomRollStart.x + minorOffset, y: bottomRollStart.y - majorOffset),
+            CGPoint(x: bottomRollEnd.x - minorOffset, y: bottomRollEnd.y - majorOffset),
+            CGPoint(x: bottomRollEnd.x - minorOffset, y: bottomRollEnd.y + majorOffset),
+            CGPoint(x: bottomRollStart.x + minorOffset, y: bottomRollStart.y + majorOffset)
+        ]
 
+        // Draw!
         ctx.clear(bounds)
+        ctx.setLineWidth(strokeThickness)
 
-        ctx.beginPath()
-        ctx.move(to: CGPoint(x: lvStart.x - thickness, y: lvStart.y))
-        ctx.addLine(to: CGPoint(x: lvEnd.x - thickness, y: lvEnd.y))
-        ctx.addLine(to: CGPoint(x: lvEnd.x + thickness, y: lvEnd.y))
-        ctx.addLine(to: CGPoint(x: lvStart.x + thickness, y: lvStart.y))
-        ctx.closePath()
-        ctx.drawPath(using: .fillStroke)
+        setColor(forDeviation: pitch)
+        drawPolygon(leftPitchPoints)
+        drawPolygon(rightPitchPoints)
 
-        ctx.beginPath()
-        ctx.move(to: CGPoint(x: rvStart.x - thickness, y: rvStart.y))
-        ctx.addLine(to: CGPoint(x: rvEnd.x - thickness, y: rvEnd.y))
-        ctx.addLine(to: CGPoint(x: rvEnd.x + thickness, y: rvEnd.y))
-        ctx.addLine(to: CGPoint(x: rvStart.x + thickness, y: rvStart.y))
-        ctx.closePath()
-        ctx.drawPath(using: .fillStroke)
-
-        setColor(forAngle: roll)
-
-        ctx.beginPath()
-        ctx.move(to: CGPoint(x: thStart.x, y: thStart.y - thickness))
-        ctx.addLine(to: CGPoint(x: thEnd.x, y: thEnd.y - thickness))
-        ctx.addLine(to: CGPoint(x: thEnd.x, y: thEnd.y + thickness))
-        ctx.addLine(to: CGPoint(x: thStart.x, y: thStart.y + thickness))
-        ctx.closePath()
-        ctx.drawPath(using: .fillStroke)
-
-        ctx.beginPath()
-        ctx.move(to: CGPoint(x: bhStart.x, y: bhStart.y - thickness))
-        ctx.addLine(to: CGPoint(x: bhEnd.x, y: bhEnd.y - thickness))
-        ctx.addLine(to: CGPoint(x: bhEnd.x, y: bhEnd.y + thickness))
-        ctx.addLine(to: CGPoint(x: bhStart.x, y: bhStart.y + thickness))
-        ctx.closePath()
-        ctx.drawPath(using: .fillStroke)
+        setColor(forDeviation: roll)
+        drawPolygon(topRollPoints)
+        drawPolygon(bottomRollPoints)
     }
 
 }
