@@ -85,6 +85,13 @@ class ViewController: UIViewController {
     private func updateUI() {
         assert(resourcesEvaluated == .finished)
 
+        #if true
+
+        guard presentedViewController == nil else { return }
+        presentTipJar()
+        
+        #else
+
         if everythingAvailable {
             if presentedViewController == nil {
                 presentImagePicker()
@@ -97,6 +104,8 @@ class ViewController: UIViewController {
                 self.settingsPrompt.isHidden = false
             }
         }
+
+        #endif
     }
 
     private func presentTipJar() {
