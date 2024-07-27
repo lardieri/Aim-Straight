@@ -11,12 +11,27 @@ import AVFoundation
 
 class OverlayView: UIView {
 
+    // MARK: Storyboard subviews
+
     @IBOutlet weak var tiltView: TiltView?
     @IBOutlet weak var diagnosticView: DiagnosticView? {
         didSet {
             #if DEBUG
             diagnosticView?.isHidden = false
             #endif
+        }
+    }
+
+    @IBOutlet weak var tipJarButton: UIButton! {
+        didSet {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                guard var buttonConfig = tipJarButton.configuration else { return }
+                let symbolConfig = buttonConfig.preferredSymbolConfigurationForImage
+                let largeConfig = UIImage.SymbolConfiguration(pointSize: 35.0)
+                let newSymbolConfig = symbolConfig?.applying(largeConfig)
+                buttonConfig.preferredSymbolConfigurationForImage = newSymbolConfig
+                tipJarButton.configuration = buttonConfig
+            }
         }
     }
 
@@ -51,7 +66,8 @@ class OverlayView: UIView {
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return nil
+        let tipJarPoint = convert(point, to: tipJarButton)
+        return tipJarButton.hitTest(tipJarPoint, with: event)
     }
 
     // MARK: Layout
@@ -84,6 +100,12 @@ class OverlayView: UIView {
         ].forEach { $0.isActive = true }
     }
 
+    // MARK: UI events
+
+    @IBAction func tipJarButtonTapped(_ sender: UIButton) {
+        print("Tip Jar tapped")
+    }
+    
     // MARK: Public properties
 
     var viewModel: ViewModel? = nil {

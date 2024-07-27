@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,14 +15,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Aim_Straight" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-aH-usL">
-                                <rect key="frame" x="32" y="294" width="256" height="0.0"/>
+                                <rect key="frame" x="37.5" y="343.5" width="300" height="0.0"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ins-GE-jHy" userLabel="Error Messages">
-                                        <rect key="frame" x="128" y="0.0" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="150" y="0.0" width="0.0" height="0.0"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera not available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INN-Y4-eWo">
                                                 <rect key="frame" x="0.0" y="0.0" width="346" height="0.0"/>
@@ -44,7 +45,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="M4U-r0-bHy" userLabel="Settings Prompt">
-                                        <rect key="frame" x="-24" y="0.0" width="304.5" height="80.5"/>
+                                        <rect key="frame" x="-2" y="0.0" width="304.5" height="80.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please adjust settings to allow access." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fi8-hV-g19">
                                                 <rect key="frame" x="0.0" y="0.0" width="304.5" height="0.0"/>
@@ -84,8 +85,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyK-Nu-QhS" userLabel="Overlay view" customClass="OverlayView" customModule="Aim_Straight" customModuleProvider="target">
+                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JyK-Nu-QhS" userLabel="Overlay view" customClass="OverlayView" customModule="Aim_Straight" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="350"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-DN-0Lp" customClass="TiltView" customModule="Aim_Straight" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="25" width="300" height="300"/>
@@ -239,11 +241,40 @@
                                 <outlet property="signLabel" destination="zah-Ru-zzU" id="DuJ-lD-5Ju"/>
                             </connections>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pka-Ws-MCI">
+                            <rect key="frame" x="234" y="0.0" width="50" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="aXs-xD-wwl">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="53"/>
+                                </constraint>
+                                <constraint firstAttribute="width" constant="50" id="o89-vN-x8a">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="53"/>
+                                </constraint>
+                            </constraints>
+                            <color key="tintColor" systemColor="systemGreenColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain">
+                                <imageReference key="image" image="heart.circle.fill" catalog="system" symbolScale="large"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="tipJarButtonTapped:" destination="JyK-Nu-QhS" eventType="touchUpInside" id="8Lu-mI-zb1"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="pka-Ws-MCI" firstAttribute="top" secondItem="JyK-Nu-QhS" secondAttribute="top" id="6Jp-Ly-XuY">
+                            <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                        </constraint>
+                        <constraint firstItem="pka-Ws-MCI" firstAttribute="trailing" secondItem="JyK-Nu-QhS" secondAttribute="trailing" constant="-16" id="8Mc-Sb-fbj">
+                            <variation key="heightClass=regular-widthClass=regular" constant="-28"/>
+                        </constraint>
+                    </constraints>
                     <connections>
                         <outlet property="diagnosticView" destination="eX1-E4-g6Q" id="C42-1B-QyZ"/>
                         <outlet property="tiltView" destination="cRm-DN-0Lp" id="KNu-og-OKb"/>
+                        <outlet property="tipJarButton" destination="pka-Ws-MCI" id="egG-YC-ziZ"/>
                     </connections>
                 </view>
             </objects>
@@ -259,11 +290,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
