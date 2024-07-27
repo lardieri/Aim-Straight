@@ -12,6 +12,7 @@
 		DF2C50092C5497F300694BE0 /* PictureCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C50082C5497F300694BE0 /* PictureCounter.swift */; };
 		DF2C500B2C549F9E00694BE0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */; };
 		DF2C500D2C54C6C700694BE0 /* LastPaymentDateRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C500C2C54C6C700694BE0 /* LastPaymentDateRecorder.swift */; };
+		DF2C500F2C54CA4600694BE0 /* TipJarBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C500E2C54CA4600694BE0 /* TipJarBusinessLogic.swift */; };
 		DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */ = {isa = PBXBuildFile; productRef = DF7C0C0629F11D0000251213 /* Interaction-Queue */; };
 		DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0829F7B0F500251213 /* Vector math.swift */; };
 		DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0A29F7B22D00251213 /* TiltView.swift */; };
@@ -35,6 +36,7 @@
 		DF2C50082C5497F300694BE0 /* PictureCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCounter.swift; sourceTree = "<group>"; };
 		DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DF2C500C2C54C6C700694BE0 /* LastPaymentDateRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastPaymentDateRecorder.swift; sourceTree = "<group>"; };
+		DF2C500E2C54CA4600694BE0 /* TipJarBusinessLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarBusinessLogic.swift; sourceTree = "<group>"; };
 		DF7C0C0829F7B0F500251213 /* Vector math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector math.swift"; sourceTree = "<group>"; };
 		DF7C0C0A29F7B22D00251213 /* TiltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltView.swift; sourceTree = "<group>"; };
 		DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diagnostic View.swift"; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				DF2C50082C5497F300694BE0 /* PictureCounter.swift */,
 				DF2C50062C54902B00694BE0 /* StoreKitTransactionMonitor.swift */,
 				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
+				DF2C500E2C54CA4600694BE0 /* TipJarBusinessLogic.swift */,
 				DFDD391E2C3B5EEE0071F160 /* TipJarHostingController.swift */,
 				DFDD39172C3A03E20071F160 /* TipJarTestProducts.storekit */,
 				DFDD39202C3B5F3B0071F160 /* TipJarView.swift */,
@@ -201,6 +204,7 @@
 				DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */,
 				DFECD9922A1D95F4003D3D0C /* Extensions.swift in Sources */,
 				DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */,
+				DF2C500F2C54CA4600694BE0 /* TipJarBusinessLogic.swift in Sources */,
 				DFC7ACB72B87214500B7A96F /* Diagnostic View.swift in Sources */,
 				DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */,
 				DFDD39212C3B5F3B0071F160 /* TipJarView.swift in Sources */,

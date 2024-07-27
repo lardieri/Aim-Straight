@@ -16,11 +16,18 @@ class PictureCounter {
     @discardableResult
     func increment() -> Int {
         pictureCounter += 1
-        Self.writePictureCounter(pictureCounter)
         return pictureCounter
     }
 
-    private(set) var pictureCounter: Int
+    func reset() {
+        pictureCounter = 0
+    }
+
+    private(set) var pictureCounter: Int {
+        didSet {
+            Self.writePictureCounter(pictureCounter)
+        }
+    }
 
 }
 

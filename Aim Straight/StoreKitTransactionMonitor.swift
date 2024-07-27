@@ -9,17 +9,17 @@ import StoreKit
 
 class StoreKitTransactionMonitor {
 
-    init() {
-        task = Task.detached {
-            let recorder = LastPaymentDateRecorder()
+    typealias PaymentTransactionFinished = () -> Void
 
+    init(paymentTransactionFinished: @escaping PaymentTransactionFinished) {
+        task = Task.detached {
             for await update in StoreKit.Transaction.updates {
                 guard case .verified(let transaction) = update else {
                     continue
                 }
 
                 await transaction.finish()
-                recorder.recordPayment()
+                paymentTransactionFinished()
             }
         }
     }

@@ -85,13 +85,6 @@ class ViewController: UIViewController {
     private func updateUI() {
         assert(resourcesEvaluated == .finished)
 
-        #if true
-
-        guard presentedViewController == nil else { return }
-        presentTipJar()
-        
-        #else
-
         if everythingAvailable {
             if presentedViewController == nil {
                 presentImagePicker()
@@ -104,13 +97,14 @@ class ViewController: UIViewController {
                 self.settingsPrompt.isHidden = false
             }
         }
-
-        #endif
     }
 
     private func presentTipJar() {
+        guard let imagePicker = presentedViewController as? UIImagePickerController else { return }
+
         let tipJarVC = storyboard!.instantiateViewController(identifier: "TipJarHostingController") as TipJarHostingController
-        present(tipJarVC, animated: true)
+
+        imagePicker.present(tipJarVC, animated: true)
     }
 
     private func presentImagePicker() {
@@ -133,8 +127,8 @@ class ViewController: UIViewController {
         present(imagePicker, animated: false, completion: nil)
     }
 
-    private func dismissImagePicker() {
-        guard presentedViewController is UIImagePickerController else { return }
+    private func dismissImagePicker(_ imagePicker: UIImagePickerController) {
+        guard presentedViewController === imagePicker else { return }
 
         // When we use the built-in camera controls, we need to dismiss the picker after every picture.
         // See Apple's documentation for UIImagePickerController.
@@ -155,6 +149,12 @@ class ViewController: UIViewController {
 
     private func openPhotos() {
         UIApplication.shared.open(URL(string: "photos-redirect://")!)
+    }
+
+    private func onPhotoSaved() {
+        if tipJarBusinessLogic.showTipJarAfterTakingPicture() {
+            presentTipJar()
+        }
     }
 
     // MARK: Private types
@@ -187,7 +187,7 @@ class ViewController: UIViewController {
 
     private let viewModel = ViewModel()
 
-    private let pictureCounter = PictureCounter()
+    private let tipJarBusinessLogic = TipJarBusinessLogic()
 
 }
 
@@ -207,7 +207,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
         }
 
-        dismissImagePicker()
+        dismissImagePicker(picker)
     }
 
     @objc private func saveCompletion(_ image: UIImage, error: Error?, context: UnsafeMutableRawPointer) {
@@ -218,7 +218,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         } else {
             print("Photo saved successfully.")
 
-            incrementPictureCounter()
+            onPhotoSaved()
 
             // TODO: Display thumbnail that opens the Photos app when tapped.
         }
@@ -333,17 +333,6 @@ fileprivate extension ViewController {
     private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
         motionAvailable = motionManager.isDeviceMotionAvailable
         finished()
-    }
-
-}
-
-
-// MARK: - Picture Counter
-
-fileprivate extension ViewController {
-
-    private func incrementPictureCounter() {
-        pictureCounter.increment()
     }
 
 }

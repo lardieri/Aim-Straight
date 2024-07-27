@@ -65,6 +65,11 @@ struct TipJarView: View {
             icon(for: product.id)
         }
         .storeButton(.hidden, for: .cancellation)
+        .onInAppPurchaseStart { _ in
+            OperationQueue.main.addOperation {
+                dismiss()
+            }
+        }
     }
 
     @ViewBuilder
