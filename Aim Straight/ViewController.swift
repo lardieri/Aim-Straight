@@ -85,7 +85,7 @@ class ViewController: UIViewController {
     private func updateUI() {
         assert(resourcesEvaluated == .finished)
 
-        #if false
+        #if true
 
         guard presentedViewController == nil else { return }
         presentTipJar()

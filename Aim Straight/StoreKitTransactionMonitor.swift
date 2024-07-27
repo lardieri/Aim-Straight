@@ -8,16 +8,18 @@
 import StoreKit
 
 class StoreKitTransactionMonitor {
-    private var task: Task<Void, Never>?
 
     init() {
         task = Task.detached {
+            let recorder = LastPaymentDateRecorder()
+
             for await update in StoreKit.Transaction.updates {
                 guard case .verified(let transaction) = update else {
                     continue
                 }
 
                 await transaction.finish()
+                recorder.recordPayment()
             }
         }
     }
@@ -25,4 +27,7 @@ class StoreKitTransactionMonitor {
     deinit {
         task?.cancel()
     }
+
+    private var task: Task<Void, Never>?
+
 }
