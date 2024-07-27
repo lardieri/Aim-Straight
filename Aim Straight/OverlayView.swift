@@ -57,7 +57,9 @@ class OverlayView: UIView {
     // MARK: Layout
 
     private func clearConstraints() {
-        constraints.forEach { $0.isActive = false }
+        constraints
+            .filter { $0.firstItem === tiltView }
+            .forEach { $0.isActive = false }
     }
 
     private func activateConstraints() {

@@ -99,6 +99,11 @@ class ViewController: UIViewController {
         }
     }
 
+    private func presentTipJar() {
+        let tipJarVC = storyboard!.instantiateViewController(identifier: "TipJarHostingController") as TipJarHostingController
+        present(tipJarVC, animated: true)
+    }
+
     private func presentImagePicker() {
         assert(presentedViewController == nil)
 

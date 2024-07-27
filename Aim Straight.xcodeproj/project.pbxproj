@@ -13,6 +13,9 @@
 		DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0A29F7B22D00251213 /* TiltView.swift */; };
 		DFC7ACB72B87214500B7A96F /* Diagnostic View.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */; };
 		DFDD391D2C3A050E0071F160 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFDD391C2C3A050E0071F160 /* StoreKit.framework */; };
+		DFDD391F2C3B5EEE0071F160 /* TipJarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD391E2C3B5EEE0071F160 /* TipJarHostingController.swift */; };
+		DFDD39212C3B5F3B0071F160 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD39202C3B5F3B0071F160 /* TipJarView.swift */; };
+		DFDD39232C3BBA9E0071F160 /* TipLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD39222C3BBA9E0071F160 /* TipLevels.swift */; };
 		DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211829EDF8940057B9B1 /* AppDelegate.swift */; };
 		DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE2211C29EDF8940057B9B1 /* ViewController.swift */; };
 		DFE2212029EDF8940057B9B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE2211E29EDF8940057B9B1 /* Main.storyboard */; };
@@ -29,6 +32,9 @@
 		DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diagnostic View.swift"; sourceTree = "<group>"; };
 		DFDD39172C3A03E20071F160 /* TipJarTestProducts.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = TipJarTestProducts.storekit; sourceTree = "<group>"; };
 		DFDD391C2C3A050E0071F160 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		DFDD391E2C3B5EEE0071F160 /* TipJarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarHostingController.swift; sourceTree = "<group>"; };
+		DFDD39202C3B5F3B0071F160 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
+		DFDD39222C3BBA9E0071F160 /* TipLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipLevels.swift; sourceTree = "<group>"; };
 		DFE2211529EDF8940057B9B1 /* Aim Straight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aim Straight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE2211829EDF8940057B9B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFE2211C29EDF8940057B9B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +93,9 @@
 				DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */,
 				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
 				DFDD39172C3A03E20071F160 /* TipJarTestProducts.storekit */,
+				DFDD391E2C3B5EEE0071F160 /* TipJarHostingController.swift */,
+				DFDD39202C3B5F3B0071F160 /* TipJarView.swift */,
+				DFDD39222C3BBA9E0071F160 /* TipLevels.swift */,
 				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
 				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
 				DF29155F2B8C46FB00317171 /* ViewModel.swift */,
@@ -175,11 +184,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFDD391F2C3B5EEE0071F160 /* TipJarHostingController.swift in Sources */,
 				DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */,
 				DFECD9922A1D95F4003D3D0C /* Extensions.swift in Sources */,
 				DFE2211D29EDF8940057B9B1 /* ViewController.swift in Sources */,
 				DFC7ACB72B87214500B7A96F /* Diagnostic View.swift in Sources */,
 				DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */,
+				DFDD39212C3B5F3B0071F160 /* TipJarView.swift in Sources */,
+				DFDD39232C3BBA9E0071F160 /* TipLevels.swift in Sources */,
 				DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */,
 				DFECD9902A1D94DA003D3D0C /* OverlayView.swift in Sources */,
 				DF2915602B8C46FB00317171 /* ViewModel.swift in Sources */,
