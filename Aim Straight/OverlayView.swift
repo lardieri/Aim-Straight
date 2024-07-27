@@ -9,6 +9,10 @@ import UIKit
 import AVFoundation
 
 
+protocol OverlayViewDelegate: AnyObject {
+    func tipJarButtonTapped()
+}
+
 class OverlayView: UIView {
 
     // MARK: Storyboard subviews
@@ -103,7 +107,7 @@ class OverlayView: UIView {
     // MARK: UI events
 
     @IBAction func tipJarButtonTapped(_ sender: UIButton) {
-        print("Tip Jar tapped")
+        delegate?.tipJarButtonTapped()
     }
     
     // MARK: Public properties
@@ -121,6 +125,8 @@ class OverlayView: UIView {
             viewModel?.delegate = self
         }
     }
+
+    weak var delegate: OverlayViewDelegate?
 
     // MARK: Private properties
 

@@ -7,19 +7,21 @@
 
 import StoreKit
 
+protocol StoreKitTransactionMonitorDelegate: AnyObject {
+    func paymentTransactionFinished()
+}
+
 class StoreKitTransactionMonitor {
 
-    typealias PaymentTransactionFinished = () -> Void
-
-    init(paymentTransactionFinished: @escaping PaymentTransactionFinished) {
-        task = Task.detached {
+    init() {
+        task = Task.detached { [weak self] in
             for await update in StoreKit.Transaction.updates {
                 guard case .verified(let transaction) = update else {
                     continue
                 }
 
                 await transaction.finish()
-                paymentTransactionFinished()
+                self?.delegate?.paymentTransactionFinished()
             }
         }
     }
@@ -28,6 +30,7 @@ class StoreKitTransactionMonitor {
         task?.cancel()
     }
 
-    private var task: Task<Void, Never>?
+    weak var delegate: StoreKitTransactionMonitorDelegate?
+    private var task: Task<Void, Never>? = nil
 
 }

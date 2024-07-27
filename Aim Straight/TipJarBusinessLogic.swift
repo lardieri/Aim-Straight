@@ -10,14 +10,14 @@ import Foundation
 fileprivate let minPicturesTakenSinceLastPayment = 5
 fileprivate let minDaysSinceLastPayment = 30
 
+protocol TipJarBusinessLogicDelegate: AnyObject {
+    func userMadeTipPayment()
+}
+
 class TipJarBusinessLogic {
     
     init() {
-        transactionMonitor = StoreKitTransactionMonitor(paymentTransactionFinished: { [paymentRecorder, pictureCounter] in
-            print("TipJarBusinessLogic: payment transaction finished")
-            paymentRecorder.recordPayment()
-            pictureCounter.reset()
-        })
+        transactionMonitor.delegate = self
     }
 
     func showTipJarAfterTakingPicture() -> Bool {
@@ -37,8 +37,23 @@ class TipJarBusinessLogic {
         return true
     }
 
+    weak var delegate: TipJarBusinessLogicDelegate?
+
     private let pictureCounter = PictureCounter()
     private let paymentRecorder = LastPaymentDateRecorder()
-    private let transactionMonitor: StoreKitTransactionMonitor
+    private let transactionMonitor = StoreKitTransactionMonitor()
+
+}
+
+
+// MARK: -
+
+extension TipJarBusinessLogic: StoreKitTransactionMonitorDelegate {
+
+    func paymentTransactionFinished() {
+        paymentRecorder.recordPayment()
+        pictureCounter.reset()
+        delegate?.userMadeTipPayment()
+    }
 
 }

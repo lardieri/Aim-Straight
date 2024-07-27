@@ -28,6 +28,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         overlayView.viewModel = viewModel
+        overlayView.delegate = self
+
+        tipJarBusinessLogic.delegate = self
 
         addNotificationObservers()
 
@@ -152,9 +155,7 @@ class ViewController: UIViewController {
     }
 
     private func onPhotoSaved() {
-        if tipJarBusinessLogic.showTipJarAfterTakingPicture() {
-            presentTipJar()
-        }
+        overlayView.tipJarButton.isHidden = !tipJarBusinessLogic.showTipJarAfterTakingPicture()
     }
 
     // MARK: Private types
@@ -333,6 +334,32 @@ fileprivate extension ViewController {
     private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
         motionAvailable = motionManager.isDeviceMotionAvailable
         finished()
+    }
+
+}
+
+
+// MARK: - OverlayViewDelegate
+
+extension ViewController: OverlayViewDelegate {
+
+    func tipJarButtonTapped() {
+        OperationQueue.main.addOperation {
+            self.presentTipJar()
+        }
+    }
+
+}
+
+
+// MARK: - TipJarBusinessLogicDelegate
+
+extension ViewController: TipJarBusinessLogicDelegate {
+
+    func userMadeTipPayment() {
+        OperationQueue.main.addOperation {
+            self.overlayView.tipJarButton.isHidden = true
+        }
     }
 
 }

@@ -241,7 +241,7 @@
                                 <outlet property="signLabel" destination="zah-Ru-zzU" id="DuJ-lD-5Ju"/>
                             </connections>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pka-Ws-MCI">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pka-Ws-MCI">
                             <rect key="frame" x="234" y="0.0" width="50" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="aXs-xD-wwl">
