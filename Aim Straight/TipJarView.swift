@@ -61,8 +61,21 @@ struct TipJarView: View {
 
     @ViewBuilder
     private func storeView() -> some View {
-        StoreView(ids: productIdentifiers)
+        StoreView(ids: productIdentifiers) { product in
+            icon(for: product.id)
+        }
         .storeButton(.hidden, for: .cancellation)
+    }
+
+    @ViewBuilder
+    private func icon(for productIdentifier: String) -> some View {
+        if let tipLevel = TipLevel(rawValue: productIdentifier) {
+            Text(tipLevel.iconString)
+                .font(.largeTitle)
+        } else {
+            Text(verbatim: "")
+                .font(.largeTitle)
+        }
     }
 }
 

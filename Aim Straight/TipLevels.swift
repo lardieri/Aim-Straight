@@ -16,3 +16,13 @@ enum TipLevel: String, CaseIterable {
 extension TipLevel {
     static let productIdentifiers = TipLevel.allCases.map { $0.rawValue }
 }
+
+extension TipLevel {
+    var iconString: String {
+        switch self {
+            case .budget:   "🙂"
+            case .standard: "😊"
+            case .pro:      "😃"
+        }
+    }
+}
