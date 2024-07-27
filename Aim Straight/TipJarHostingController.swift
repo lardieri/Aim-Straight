@@ -17,4 +17,6 @@ class TipJarHostingController: UIHostingController<TipJarView> {
         super.init(coder: aDecoder, rootView: rootView)
     }
 
+    private let transactionMonitor = StoreKitTransactionMonitor()
+
 }
