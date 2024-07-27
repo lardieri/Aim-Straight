@@ -85,7 +85,7 @@ class ViewController: UIViewController {
     private func updateUI() {
         assert(resourcesEvaluated == .finished)
 
-        #if true
+        #if false
 
         guard presentedViewController == nil else { return }
         presentTipJar()
@@ -187,6 +187,8 @@ class ViewController: UIViewController {
 
     private let viewModel = ViewModel()
 
+    private let pictureCounter = PictureCounter()
+
 }
 
 
@@ -215,6 +217,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             // TODO: Display error message, offer to take user to Settings.
         } else {
             print("Photo saved successfully.")
+
+            incrementPictureCounter()
 
             // TODO: Display thumbnail that opens the Photos app when tapped.
         }
@@ -329,6 +333,17 @@ fileprivate extension ViewController {
     private func evaluateMotionAvailability(finished: @escaping AsyncBlockOperation.FinishCallback) {
         motionAvailable = motionManager.isDeviceMotionAvailable
         finished()
+    }
+
+}
+
+
+// MARK: - Picture Counter
+
+fileprivate extension ViewController {
+
+    private func incrementPictureCounter() {
+        pictureCounter.increment()
     }
 
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DF2915602B8C46FB00317171 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF29155F2B8C46FB00317171 /* ViewModel.swift */; };
 		DF2C50072C54902B00694BE0 /* StoreKitTransactionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C50062C54902B00694BE0 /* StoreKitTransactionMonitor.swift */; };
+		DF2C50092C5497F300694BE0 /* PictureCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C50082C5497F300694BE0 /* PictureCounter.swift */; };
+		DF2C500B2C549F9E00694BE0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */; };
 		DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */ = {isa = PBXBuildFile; productRef = DF7C0C0629F11D0000251213 /* Interaction-Queue */; };
 		DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0829F7B0F500251213 /* Vector math.swift */; };
 		DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0A29F7B22D00251213 /* TiltView.swift */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		DF29155F2B8C46FB00317171 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DF2C50062C54902B00694BE0 /* StoreKitTransactionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitTransactionMonitor.swift; sourceTree = "<group>"; };
+		DF2C50082C5497F300694BE0 /* PictureCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCounter.swift; sourceTree = "<group>"; };
+		DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DF7C0C0829F7B0F500251213 /* Vector math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector math.swift"; sourceTree = "<group>"; };
 		DF7C0C0A29F7B22D00251213 /* TiltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltView.swift; sourceTree = "<group>"; };
 		DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diagnostic View.swift"; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				DFECD9912A1D95F4003D3D0C /* Extensions.swift */,
 				DFECD98F2A1D94DA003D3D0C /* OverlayView.swift */,
 				DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */,
+				DF2C50082C5497F300694BE0 /* PictureCounter.swift */,
 				DF2C50062C54902B00694BE0 /* StoreKitTransactionMonitor.swift */,
 				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
 				DFDD391E2C3B5EEE0071F160 /* TipJarHostingController.swift */,
@@ -106,6 +111,7 @@
 				DFE2212129EDF8980057B9B1 /* Assets.xcassets */,
 				DFE2212329EDF8980057B9B1 /* LaunchScreen.storyboard */,
 				DFE2212629EDF8980057B9B1 /* Info.plist */,
+				DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */,
 			);
 			path = "Aim Straight";
 			sourceTree = "<group>";
@@ -176,6 +182,7 @@
 			files = (
 				DFE2212529EDF8980057B9B1 /* LaunchScreen.storyboard in Resources */,
 				DFE2212229EDF8980057B9B1 /* Assets.xcassets in Resources */,
+				DF2C500B2C549F9E00694BE0 /* PrivacyInfo.xcprivacy in Resources */,
 				DFE2212029EDF8940057B9B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +203,7 @@
 				DFDD39212C3B5F3B0071F160 /* TipJarView.swift in Sources */,
 				DFDD39232C3BBA9E0071F160 /* TipLevels.swift in Sources */,
 				DFE2211929EDF8940057B9B1 /* AppDelegate.swift in Sources */,
+				DF2C50092C5497F300694BE0 /* PictureCounter.swift in Sources */,
 				DFECD9902A1D94DA003D3D0C /* OverlayView.swift in Sources */,
 				DF2C50072C54902B00694BE0 /* StoreKitTransactionMonitor.swift in Sources */,
 				DF2915602B8C46FB00317171 /* ViewModel.swift in Sources */,
