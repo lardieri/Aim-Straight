@@ -27,6 +27,7 @@
 		DF7C0C0829F7B0F500251213 /* Vector math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector math.swift"; sourceTree = "<group>"; };
 		DF7C0C0A29F7B22D00251213 /* TiltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltView.swift; sourceTree = "<group>"; };
 		DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diagnostic View.swift"; sourceTree = "<group>"; };
+		DFDD39172C3A03E20071F160 /* TipJarTestProducts.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = TipJarTestProducts.storekit; sourceTree = "<group>"; };
 		DFDD391C2C3A050E0071F160 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DFE2211529EDF8940057B9B1 /* Aim Straight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aim Straight.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE2211829EDF8940057B9B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 				DFECD98F2A1D94DA003D3D0C /* OverlayView.swift */,
 				DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */,
 				DF7C0C0A29F7B22D00251213 /* TiltView.swift */,
+				DFDD39172C3A03E20071F160 /* TipJarTestProducts.storekit */,
 				DF7C0C0829F7B0F500251213 /* Vector math.swift */,
 				DFE2211C29EDF8940057B9B1 /* ViewController.swift */,
 				DF29155F2B8C46FB00317171 /* ViewModel.swift */,

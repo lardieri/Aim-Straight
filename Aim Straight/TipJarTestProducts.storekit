@@ -1,0 +1,175 @@
+{
+  "identifier" : "89D72FD7",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "5.0",
+      "familyShareable" : false,
+      "internalID" : "6581481488",
+      "localizations" : [
+        {
+          "description" : "Merci de m'aider à prendre meilleures photos",
+          "displayName" : "Pourboire au développeur",
+          "locale" : "fr"
+        },
+        {
+          "description" : "Thank you for helping me take better pictures",
+          "displayName" : "Tip the Developer",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Cảm ơn bạn đã giúp chụp ảnh đẹp hơn.",
+          "displayName" : "Tiền thưởng cho nhà phát triển",
+          "locale" : "vi"
+        },
+        {
+          "description" : "Vielen Dank für bessere Fotos zu machen.",
+          "displayName" : "Trinkgeld für den Entwickler",
+          "locale" : "de"
+        },
+        {
+          "description" : "Спасибо, что помогаете делать снимки лучше",
+          "displayName" : "Чаевые разработчика приложений",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "AimStraight.TipBudget",
+      "referenceName" : "Tip Budget",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "20.0",
+      "familyShareable" : false,
+      "internalID" : "6581481375",
+      "localizations" : [
+        {
+          "description" : "Merci de m'aider à prendre meilleures photos",
+          "displayName" : "Pourboire au développeur",
+          "locale" : "fr"
+        },
+        {
+          "description" : "Спасибо, что помогаете делать снимки лучше",
+          "displayName" : "Чаевые разработчика приложений",
+          "locale" : "ru"
+        },
+        {
+          "description" : "Cảm ơn bạn đã giúp chụp ảnh đẹp hơn.",
+          "displayName" : "Tiền thưởng cho nhà phát triển",
+          "locale" : "vi"
+        },
+        {
+          "description" : "Thank you for helping me take better pictures",
+          "displayName" : "Tip the Developer",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Vielen Dank für bessere Fotos zu machen.",
+          "displayName" : "Trinkgeld für den Entwickler",
+          "locale" : "de"
+        }
+      ],
+      "productID" : "AimStraight.TipPro",
+      "referenceName" : "Tip Pro",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "10.0",
+      "familyShareable" : false,
+      "internalID" : "6581481562",
+      "localizations" : [
+        {
+          "description" : "Vielen Dank für bessere Fotos zu machen.",
+          "displayName" : "Trinkgeld für den Entwickler",
+          "locale" : "de"
+        },
+        {
+          "description" : "Thank you for helping me take better pictures",
+          "displayName" : "Tip the Developer",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Спасибо, что помогаете делать снимки лучше",
+          "displayName" : "Чаевые разработчика приложений",
+          "locale" : "ru"
+        },
+        {
+          "description" : "Cảm ơn bạn đã giúp chụp ảnh đẹp hơn.",
+          "displayName" : "Tiền thưởng cho nhà phát triển",
+          "locale" : "vi"
+        },
+        {
+          "description" : "Merci de m'aider à prendre meilleures photos",
+          "displayName" : "Pourboire au développeur",
+          "locale" : "fr"
+        }
+      ],
+      "productID" : "AimStraight.TipStandard",
+      "referenceName" : "Tip Standard",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6448090575",
+    "_developerTeamID" : "U7F5VP3NPF",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 743736188.38029897,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
