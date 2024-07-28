@@ -283,7 +283,7 @@
         <!--Tip Jar Hosting Controller-->
         <scene sceneID="wN3-Bg-Xu7">
             <objects>
-                <hostingController storyboardIdentifier="TipJarHostingController" id="xuw-va-rQI" userLabel="Tip Jar Hosting Controller" customClass="TipJarHostingController" customModule="Aim_Straight" customModuleProvider="target" sceneMemberID="viewController"/>
+                <hostingController storyboardIdentifier="TipJarHostingController" modalPresentationStyle="formSheet" id="xuw-va-rQI" userLabel="Tip Jar Hosting Controller" customClass="TipJarHostingController" customModule="Aim_Straight" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FEX-DX-Rec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1016" y="-26"/>

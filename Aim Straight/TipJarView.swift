@@ -61,6 +61,18 @@ struct TipJarView: View {
 
     @ViewBuilder
     private func storeView() -> some View {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            storeViewBase()
+                .productViewStyle(.compact)
+                .frame(maxWidth: 500.0)
+        } else {
+            storeViewBase()
+                .productViewStyle(.regular)
+        }
+    }
+
+    @ViewBuilder
+    private func storeViewBase() -> some View {
         StoreView(ids: productIdentifiers) { product in
             icon(for: product.id)
         }
