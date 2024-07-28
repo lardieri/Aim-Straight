@@ -8,7 +8,7 @@
 import Foundation
 
 fileprivate let minPicturesTakenSinceLastPayment = 5
-fileprivate let minDaysSinceLastPayment = 30
+fileprivate let minDaysSinceLastPayment = 182
 
 protocol TipJarBusinessLogicDelegate: AnyObject {
     func userMadeTipPayment()

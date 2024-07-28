@@ -5,7 +5,7 @@
   ],
   "products" : [
     {
-      "displayPrice" : "5.0",
+      "displayPrice" : "2.0",
       "familyShareable" : false,
       "internalID" : "6581481488",
       "localizations" : [
@@ -40,7 +40,7 @@
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "20.0",
+      "displayPrice" : "10.0",
       "familyShareable" : false,
       "internalID" : "6581481375",
       "localizations" : [
@@ -75,7 +75,7 @@
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "10.0",
+      "displayPrice" : "5.0",
       "familyShareable" : false,
       "internalID" : "6581481562",
       "localizations" : [
@@ -114,7 +114,7 @@
     "_applicationInternalID" : "6448090575",
     "_developerTeamID" : "U7F5VP3NPF",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 743736188.38029897,
+    "_lastSynchronizedDate" : 743887330.57846701,
     "_locale" : "en_US",
     "_storefront" : "USA",
     "_storeKitErrors" : [
