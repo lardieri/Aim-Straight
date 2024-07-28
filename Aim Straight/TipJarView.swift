@@ -54,7 +54,10 @@ struct TipJarView: View {
     @ViewBuilder
     private func ctaView() -> some View {
         let appName = (Bundle.main.infoDictionary?["CFBundleName"] as? String) ?? "Aim Straight"
-        let message = "If you are enjoying \(appName), you may send a gratuity to the developer."
+        let defaultMessage = "If you are enjoying %@, you may send a gratuity to the developer."
+        let messageTemplate = Bundle.main.localizedString(forKey: "TipJarCTA", value: defaultMessage, table: nil)
+        let message = String(format: messageTemplate, appName)
+        
         Text(message)
             .padding()
     }

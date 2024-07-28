@@ -13,6 +13,7 @@
 		DF2C500B2C549F9E00694BE0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */; };
 		DF2C500D2C54C6C700694BE0 /* LastPaymentDateRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C500C2C54C6C700694BE0 /* LastPaymentDateRecorder.swift */; };
 		DF2C500F2C54CA4600694BE0 /* TipJarBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2C500E2C54CA4600694BE0 /* TipJarBusinessLogic.swift */; };
+		DF2C50122C56C93600694BE0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF2C50102C56C93600694BE0 /* Localizable.strings */; };
 		DF7C0C0729F11D0000251213 /* Interaction-Queue in Frameworks */ = {isa = PBXBuildFile; productRef = DF7C0C0629F11D0000251213 /* Interaction-Queue */; };
 		DF7C0C0929F7B0F500251213 /* Vector math.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0829F7B0F500251213 /* Vector math.swift */; };
 		DF7C0C0B29F7B22D00251213 /* TiltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C0C0A29F7B22D00251213 /* TiltView.swift */; };
@@ -37,6 +38,11 @@
 		DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DF2C500C2C54C6C700694BE0 /* LastPaymentDateRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastPaymentDateRecorder.swift; sourceTree = "<group>"; };
 		DF2C500E2C54CA4600694BE0 /* TipJarBusinessLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarBusinessLogic.swift; sourceTree = "<group>"; };
+		DF2C50112C56C93600694BE0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DF2C50132C56CBB000694BE0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DF2C50142C56CBBA00694BE0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DF2C50152C56CBC700694BE0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DF2C50162C56CBCE00694BE0 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DF7C0C0829F7B0F500251213 /* Vector math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector math.swift"; sourceTree = "<group>"; };
 		DF7C0C0A29F7B22D00251213 /* TiltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltView.swift; sourceTree = "<group>"; };
 		DFC7ACB62B87214500B7A96F /* Diagnostic View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diagnostic View.swift"; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 				DF29155F2B8C46FB00317171 /* ViewModel.swift */,
 				DFE2211E29EDF8940057B9B1 /* Main.storyboard */,
 				DFE2212129EDF8980057B9B1 /* Assets.xcassets */,
+				DF2C50102C56C93600694BE0 /* Localizable.strings */,
 				DFE2212329EDF8980057B9B1 /* LaunchScreen.storyboard */,
 				DFE2212629EDF8980057B9B1 /* Info.plist */,
 				DF2C500A2C549E5600694BE0 /* PrivacyInfo.xcprivacy */,
@@ -167,6 +174,10 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				de,
+				ru,
+				vi,
 			);
 			mainGroup = DFE2210C29EDF8940057B9B1;
 			packageReferences = (
@@ -186,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF2C50122C56C93600694BE0 /* Localizable.strings in Resources */,
 				DFE2212529EDF8980057B9B1 /* LaunchScreen.storyboard in Resources */,
 				DFE2212229EDF8980057B9B1 /* Assets.xcassets in Resources */,
 				DF2C500B2C549F9E00694BE0 /* PrivacyInfo.xcprivacy in Resources */,
@@ -221,6 +233,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		DF2C50102C56C93600694BE0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF2C50112C56C93600694BE0 /* en */,
+				DF2C50132C56CBB000694BE0 /* fr */,
+				DF2C50142C56CBBA00694BE0 /* de */,
+				DF2C50152C56CBC700694BE0 /* ru */,
+				DF2C50162C56CBCE00694BE0 /* vi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		DFE2211E29EDF8940057B9B1 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -244,6 +268,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -307,6 +332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
