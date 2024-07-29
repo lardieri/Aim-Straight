@@ -110,6 +110,17 @@ class ViewController: UIViewController {
         imagePicker.present(tipJarVC, animated: true)
     }
 
+    private func presentThankYou() {
+        let hostViewController = presentedViewController ?? self
+
+        let title = Bundle.main.localizedString(forKey: "ThankYouTitle", value: "Thank you!", table: nil)
+        let message = Bundle.main.localizedString(forKey: "ThankYouMessage", value: "I appreciate your generosity.", table: nil)
+
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        hostViewController.present(alert, animated: true)
+    }
+
     private func presentImagePicker() {
         assert(presentedViewController == nil)
 
@@ -359,6 +370,7 @@ extension ViewController: TipJarBusinessLogicDelegate {
     func userMadeTipPayment() {
         OperationQueue.main.addOperation {
             self.overlayView.tipJarButton.isHidden = true
+            self.presentThankYou()
         }
     }
 
