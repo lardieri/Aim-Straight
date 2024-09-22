@@ -2,7 +2,7 @@
 
 An iOS app to help you take straight and level photos.
 
-[<img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1670457600" alt="Download on the App Store"/>](https://apps.apple.com/app/aim-straight/id6448090575?itsct=apps_box_badge&amp;itscg=30200)
+[<img src="./assets/images/Apple_badge.svg" alt="Download on the App Store"/>](https://apps.apple.com/app/aim-straight/id6448090575?itsct=apps_box_badge&amp;itscg=30200)
 
 ## How to use
 
