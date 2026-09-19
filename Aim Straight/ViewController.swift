@@ -126,6 +126,7 @@ class ViewController: UIViewController {
 
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
+        imagePicker.mediaTypes = [UTType.image.identifier, UTType.movie.identifier]
         imagePicker.showsCameraControls = true
         imagePicker.allowsEditing = false
         imagePicker.delegate = self

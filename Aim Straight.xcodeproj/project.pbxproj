@@ -289,6 +289,7 @@
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take pictures for your Photo Library using balace lines to know when the camera is straight.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "When recording videos, audio will also be recorded.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Helps you take pictures that are level and straight.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your Photo Library.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Pictures you take will be stored in your Photo Library.";
@@ -321,6 +322,7 @@
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take pictures for your Photo Library using balace lines to know when the camera is straight.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "When recording videos, audio will also be recorded.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Helps you take pictures that are level and straight.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Pictures you take will be stored in your Photo Library.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Pictures you take will be stored in your Photo Library.";
