@@ -214,13 +214,37 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.editedImage] as? UIImage {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
-        } else if let image = info[.originalImage] as? UIImage {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
+        defer {
+            dismissImagePicker(picker)
         }
 
-        dismissImagePicker(picker)
+        guard let mediaType = info[.mediaType] as? String else {
+            return
+        }
+
+        switch mediaType {
+            case UTType.image.identifier:
+                if let image = info[.editedImage] as? UIImage {
+                    UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
+                } else if let image = info[.originalImage] as? UIImage {
+                    UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion(_:error:context:)), nil)
+                }
+
+            case UTType.movie.identifier:
+                guard let mediaURL = info[.mediaURL] as? URL else {
+                    return
+                }
+
+                let mediaPath = mediaURL.path()
+                guard UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(mediaPath) else {
+                    return
+                }
+
+                UISaveVideoAtPathToSavedPhotosAlbum(mediaPath, nil, nil, nil)
+
+            default:
+                return
+        }
     }
 
     @objc private func saveCompletion(_ image: UIImage, error: Error?, context: UnsafeMutableRawPointer) {
