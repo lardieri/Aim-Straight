@@ -6,7 +6,11 @@
 
 */
 
-"TipJarCTA" = "Wenn Ihnen %@ gefällt, können Sie dem Entwickler ein Trinkgeld senden.";
-
+"Cancel" = "Abbrechen";
+"ExitTitle" = "App schließen";
+"ExitMessage" = "Möchten Sie die App schließen?";
+"OK (acknowledge)" = "OK";
+"OK (proceed)" = "OK";
 "ThankYouTitle" = "Danke!";
 "ThankYouMessage" = "Ich schätze Ihre Großzügigkeit.";
+"TipJarCTA" = "Wenn Ihnen %@ gefällt, können Sie dem Entwickler ein Trinkgeld senden.";

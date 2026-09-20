@@ -115,17 +115,36 @@ class ViewController: UIViewController {
 
         let title = Bundle.main.localizedString(forKey: "ThankYouTitle", value: "Thank you!", table: nil)
         let message = Bundle.main.localizedString(forKey: "ThankYouMessage", value: "I appreciate your generosity.", table: nil)
+        let ok = Bundle.main.localizedString(forKey: "OK (acknowledge)", value: "OK", table: nil)
 
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: ok, style: .default))
         hostViewController.present(alert, animated: true)
     }
 
     private func presentError(localizedMessage: String) {
         let hostViewController = presentedViewController ?? self
 
-        let alert = UIAlertController(title: "🙁", message: localizedMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let title = "🙁"
+        let ok = Bundle.main.localizedString(forKey: "OK (acknowledge)", value: "OK", table: nil)
+
+        let alert = UIAlertController(title: title, message: localizedMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: ok, style: .default))
+        hostViewController.present(alert, animated: true)
+    }
+
+    private func presentExit() {
+        let hostViewController = presentedViewController ?? self
+
+        let title = Bundle.main.localizedString(forKey: "ExitTitle", value: "Close App", table: nil)
+        let message = Bundle.main.localizedString(forKey: "ExitMessage", value: "Do you want to close the app?", table: nil)
+        let ok = Bundle.main.localizedString(forKey: "OK (proceed)", value: "OK", table: nil)
+        let cancel = Bundle.main.localizedString(forKey: "Cancel", value: "Cancel", table: nil)
+
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: ok, style: .default, handler: { _ in exit(0) } ))
+        alert.addAction(UIAlertAction(title: cancel, style: .cancel))
+
         hostViewController.present(alert, animated: true)
     }
 
@@ -228,7 +247,7 @@ class ViewController: UIViewController {
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        exit(0)
+        presentExit()
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

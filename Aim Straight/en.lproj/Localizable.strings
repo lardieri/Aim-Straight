@@ -6,7 +6,11 @@
 
 */
 
-"TipJarCTA" = "If you are enjoying %@, you may send a gratuity to the developer.";
-
+"Cancel" = "Cancel";
+"ExitTitle" = "Close App";
+"ExitMessage" = "Do you want to close the app?";
+"OK (acknowledge)" = "OK";
+"OK (proceed)" = "OK";
 "ThankYouTitle" = "Thank you!";
 "ThankYouMessage" = "I appreciate your generosity.";
+"TipJarCTA" = "If you are enjoying %@, you may send a gratuity to the developer.";

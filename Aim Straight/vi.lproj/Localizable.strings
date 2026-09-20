@@ -6,7 +6,11 @@
 
 */
 
-"TipJarCTA" = "Nếu bạn đang chơi %@, bạn có thể gửi tiền thưởng cho nhà phát triển.";
-
+"Cancel" = "Hủy bỏ";
+"ExitTitle" = "Đóng ứng dụng";
+"ExitMessage" = "Bạn có muốn đóng ứng dụng không?";
+"OK (acknowledge)" = "OK";
+"OK (proceed)" = "Xác nhận";
 "ThankYouTitle" = "Cảm ơn!";
 "ThankYouMessage" = "Tôi đánh giá cao sự hào phóng của bạn.";
+"TipJarCTA" = "Nếu bạn đang chơi %@, bạn có thể gửi tiền thưởng cho nhà phát triển.";

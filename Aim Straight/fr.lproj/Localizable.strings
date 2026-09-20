@@ -6,7 +6,11 @@
 
 */
 
-"TipJarCTA" = "Si vous appréciez %@, vous pouvez envoyer un pourboire au développeur.";
-
+"Cancel" = "Annuler";
+"ExitTitle" = "Fermez l’application";
+"ExitMessage" = "Voulez-vous fermer l’application ?";
+"OK (acknowledge)" = "OK";
+"OK (proceed)" = "Confirmer";
 "ThankYouTitle" = "Merci!";
 "ThankYouMessage" = "J’apprécie votre générosité.";
+"TipJarCTA" = "Si vous appréciez %@, vous pouvez envoyer un pourboire au développeur.";
