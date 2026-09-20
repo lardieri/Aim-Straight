@@ -121,6 +121,14 @@ class ViewController: UIViewController {
         hostViewController.present(alert, animated: true)
     }
 
+    private func presentError(localizedMessage: String) {
+        let hostViewController = presentedViewController ?? self
+
+        let alert = UIAlertController(title: "🙁", message: localizedMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        hostViewController.present(alert, animated: true)
+    }
+
     private func presentImagePicker() {
         assert(presentedViewController == nil)
 
@@ -261,26 +269,16 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
     @objc private func saveCompletion(_ image: UIImage, error: Error?, context: UnsafeMutableRawPointer) {
         if let error = error {
-            print("Error saving photo: \(error.localizedDescription)")
-
-            // TODO: Display error message, offer to take user to Settings.
+            presentError(localizedMessage: error.localizedDescription)
         } else {
-            print("Photo saved successfully.")
-
             onPhotoSaved()
-
-            // TODO: Display thumbnail that opens the Photos app when tapped.
         }
     }
 
     @objc func video(_ videoPath: String?, didFinishSavingWithError error: Error?, contextInfo: UnsafeMutableRawPointer?) {
         if let error = error {
-            print("Error saving video: \(error.localizedDescription)")
-
-            // TODO: Display error message, offer to take user to Settings.
+            presentError(localizedMessage: error.localizedDescription)
         } else {
-            print("Video saved successfully.")
-
             onVideoSaved()
         }
     }
