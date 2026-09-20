@@ -170,6 +170,10 @@ class ViewController: UIViewController {
         overlayView.tipJarButton.isHidden = !tipJarBusinessLogic.showTipJarAfterTakingPicture()
     }
 
+    private func onVideoSaved() {
+        overlayView.tipJarButton.isHidden = !tipJarBusinessLogic.showTipJarAfterTakingPicture()
+    }
+
     // MARK: Private types
 
     private enum ResourceEvaulationState {
@@ -240,7 +244,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
                     return
                 }
 
-                UISaveVideoAtPathToSavedPhotosAlbum(mediaPath, nil, nil, nil)
+                UISaveVideoAtPathToSavedPhotosAlbum(mediaPath, self, #selector(video(_:didFinishSavingWithError:contextInfo:)), nil)
 
             default:
                 return
@@ -258,6 +262,18 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             onPhotoSaved()
 
             // TODO: Display thumbnail that opens the Photos app when tapped.
+        }
+    }
+
+    @objc func video(_ videoPath: String?, didFinishSavingWithError error: Error?, contextInfo: UnsafeMutableRawPointer?) {
+        if let error = error {
+            print("Error saving video: \(error.localizedDescription)")
+
+            // TODO: Display error message, offer to take user to Settings.
+        } else {
+            print("Video saved successfully.")
+
+            onVideoSaved()
         }
     }
 
