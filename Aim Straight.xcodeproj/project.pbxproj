@@ -191,7 +191,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -255,7 +255,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -287,6 +287,7 @@
 				DEVELOPMENT_TEAM = U7F5VP3NPF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take pictures for your Photo Library using balace lines to know when the camera is straight.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "When recording videos, audio will also be recorded.";
@@ -320,6 +321,7 @@
 				DEVELOPMENT_TEAM = U7F5VP3NPF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Aim Straight/Info.plist";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take pictures for your Photo Library using balace lines to know when the camera is straight.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2023 Stephen Lardieri";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "When recording videos, audio will also be recorded.";
