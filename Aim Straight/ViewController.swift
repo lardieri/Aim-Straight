@@ -127,15 +127,11 @@ class ViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
         imagePicker.mediaTypes = [UTType.image.identifier, UTType.movie.identifier]
+        imagePicker.cameraDevice = cameraDevice
+        imagePicker.cameraCaptureMode = cameraCaptureMode
         imagePicker.showsCameraControls = true
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
-
-        if UIImagePickerController.isCameraDeviceAvailable(.rear) {
-            imagePicker.cameraDevice = .rear
-        } else {
-            imagePicker.cameraDevice = .front
-        }
 
         imagePicker.cameraOverlayView = overlayView
 
@@ -204,6 +200,16 @@ class ViewController: UIViewController {
 
     private let viewModel = ViewModel()
 
+    private var cameraDevice: UIImagePickerController.CameraDevice = {
+        if UIImagePickerController.isCameraDeviceAvailable(.rear) {
+            return .rear
+        } else {
+            return .front
+        }
+    } ()
+
+    private var cameraCaptureMode = UIImagePickerController.CameraCaptureMode.photo
+
     private let tipJarBusinessLogic = TipJarBusinessLogic()
 
 }
@@ -219,6 +225,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         defer {
+            cameraDevice = picker.cameraDevice
+            cameraCaptureMode = picker.cameraCaptureMode
             dismissImagePicker(picker)
         }
 
